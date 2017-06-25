@@ -12,21 +12,21 @@ func ExampleConvert() {
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
-func Examplegpy_default() {
+func ExamplePinyin_default() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println("default:", gpy.Pinyin(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
-func ExamplePinyin_default() {
+func ExamplePinyinN_default() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println("default:", gpy.PinyinN(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
-func Examplegpy_normal() {
+func ExamplePinyin_normal() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Normal
@@ -34,7 +34,7 @@ func Examplegpy_normal() {
 	// Output: Normal: [[zhong] [guo] [ren]]
 }
 
-func Examplegpy_tone() {
+func ExamplePinyin_tone() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Tone
@@ -42,7 +42,7 @@ func Examplegpy_tone() {
 	// Output: Tone: [[zhōng] [guó] [rén]]
 }
 
-func Examplegpy_tone2() {
+func ExamplePinyin_tone2() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Tone2
@@ -50,7 +50,7 @@ func Examplegpy_tone2() {
 	// Output: Tone2: [[zho1ng] [guo2] [re2n]]
 }
 
-func Examplegpy_initials() {
+func ExamplePinyin_initials() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Initials
@@ -58,7 +58,7 @@ func Examplegpy_initials() {
 	// Output: Initials: [[zh] [g] [r]]
 }
 
-func Examplegpy_firstLetter() {
+func ExamplePinyin_firstLetter() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FirstLetter
@@ -66,7 +66,7 @@ func Examplegpy_firstLetter() {
 	// Output: [[z] [g] [r]]
 }
 
-func Examplegpy_finals() {
+func ExamplePinyin_finals() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Finals
@@ -74,7 +74,7 @@ func Examplegpy_finals() {
 	// Output: [[ong] [uo] [en]]
 }
 
-func Examplegpy_finalsTone() {
+func ExamplePinyin_finalsTone() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone
@@ -82,7 +82,7 @@ func Examplegpy_finalsTone() {
 	// Output: [[ōng] [uó] [én]]
 }
 
-func Examplegpy_finalsTone2() {
+func ExamplePinyin_finalsTone2() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone2
@@ -90,7 +90,7 @@ func Examplegpy_finalsTone2() {
 	// Output: [[o1ng] [uo2] [e2n]]
 }
 
-func Examplegpy_heteronym() {
+func ExamplePinyin_heteronym() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Heteronym = true
@@ -99,7 +99,7 @@ func Examplegpy_heteronym() {
 	// Output: [[zho1ng zho4ng] [guo2] [re2n]]
 }
 
-func Examplegpy_fallbackCustom1() {
+func ExamplePinyin_fallbackCustom1() {
 	hans := "中国人abc"
 	a := gpy.NewArgs()
 	a.Fallback = func(r rune, a gpy.Args) []string {
@@ -109,7 +109,7 @@ func Examplegpy_fallbackCustom1() {
 	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
 }
 
-func Examplegpy_fallbackCustom2() {
+func ExamplePinyin_fallbackCustom2() {
 	hans := "中国人アイウ"
 	a := gpy.NewArgs()
 	a.Fallback = func(r rune, a gpy.Args) []string {
