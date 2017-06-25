@@ -87,4 +87,4 @@ func main() {
 
 ## License
 
-Under the MIT License, base on [go-pinyin](https://github.com/go-ego/gpy).
+Under the MIT License, base on [go-pinyin](https://github.com/mozillazg/go-pinyin).

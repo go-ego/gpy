@@ -19,6 +19,13 @@ func Examplegpy_default() {
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
+func ExamplePinyin_default() {
+	hans := "中国人"
+	a := gpy.NewArgs()
+	fmt.Println("default:", gpy.PinyinN(hans, a))
+	// Output: default: [[zhong] [guo] [ren]]
+}
+
 func Examplegpy_normal() {
 	hans := "中国人"
 	a := gpy.NewArgs()
