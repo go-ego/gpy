@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go-ego/gpy"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -28,34 +29,34 @@ func main() {
 		os.Exit(1)
 	}
 
-	args := pinyin.NewArgs()
+	args := gpy.NewArgs()
 	if *heteronym {
 		args.Heteronym = true
 	}
 	switch *style {
 	case "Normal":
-		args.Style = pinyin.Normal
+		args.Style = gpy.Normal
 	case "Tone2":
-		args.Style = pinyin.Tone2
+		args.Style = gpy.Tone2
 	case "Tone3":
-		args.Style = pinyin.Tone3
+		args.Style = gpy.Tone3
 	case "Initials":
-		args.Style = pinyin.Initials
+		args.Style = gpy.Initials
 	case "FirstLetter":
-		args.Style = pinyin.FirstLetter
+		args.Style = gpy.FirstLetter
 	case "Finals":
-		args.Style = pinyin.Finals
+		args.Style = gpy.Finals
 	case "FinalsTone":
-		args.Style = pinyin.FinalsTone
+		args.Style = gpy.FinalsTone
 	case "FinalsTone2":
-		args.Style = pinyin.FinalsTone2
+		args.Style = gpy.FinalsTone2
 	case "FinalsTone3":
-		args.Style = pinyin.FinalsTone3
+		args.Style = gpy.FinalsTone3
 	default:
-		args.Style = pinyin.Tone
+		args.Style = gpy.Tone
 	}
 
-	pys := pinyin.Pinyin(strings.Join(hans, ""), args)
+	pys := gpy.Pinyin(strings.Join(hans, ""), args)
 	for _, s := range pys {
 		fmt.Print(strings.Join(s, ","), " ")
 	}
