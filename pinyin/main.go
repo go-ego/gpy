@@ -3,11 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
-	"go-ego/gpy"
 	"io/ioutil"
 	"os"
 	"strings"
 
+	"github.com/go-ego/gpy"
 	"github.com/mattn/go-isatty"
 )
 
