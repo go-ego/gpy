@@ -15,7 +15,7 @@ func ExampleConvert() {
 func Examplegpy_default() {
 	hans := "中国人"
 	a := gpy.NewArgs()
-	fmt.Println("default:", gpy.PinYin(hans, a))
+	fmt.Println("default:", gpy.Pinyin(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
@@ -39,7 +39,7 @@ func Examplegpy_tone2() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Tone2
-	fmt.Println("Tone2:", gpy.PinYin(hans, a))
+	fmt.Println("Tone2:", gpy.Pinyin(hans, a))
 	// Output: Tone2: [[zho1ng] [guo2] [re2n]]
 }
 
@@ -47,7 +47,7 @@ func Examplegpy_initials() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Initials
-	fmt.Println("Initials:", gpy.PinYin(hans, a))
+	fmt.Println("Initials:", gpy.Pinyin(hans, a))
 	// Output: Initials: [[zh] [g] [r]]
 }
 
@@ -55,7 +55,7 @@ func Examplegpy_firstLetter() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FirstLetter
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[z] [g] [r]]
 }
 
@@ -63,7 +63,7 @@ func Examplegpy_finals() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Finals
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[ong] [uo] [en]]
 }
 
@@ -71,7 +71,7 @@ func Examplegpy_finalsTone() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[ōng] [uó] [én]]
 }
 
@@ -79,7 +79,7 @@ func Examplegpy_finalsTone2() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone2
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[o1ng] [uo2] [e2n]]
 }
 
@@ -88,7 +88,7 @@ func Examplegpy_heteronym() {
 	a := gpy.NewArgs()
 	a.Heteronym = true
 	a.Style = gpy.Tone2
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[zho1ng zho4ng] [guo2] [re2n]]
 }
 
@@ -98,7 +98,7 @@ func Examplegpy_fallbackCustom1() {
 	a.Fallback = func(r rune, a gpy.Args) []string {
 		return []string{string(r + 1)}
 	}
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
 }
 
@@ -118,14 +118,14 @@ func Examplegpy_fallbackCustom2() {
 			return []string{}
 		}
 	}
-	fmt.Println(gpy.PinYin(hans, a))
+	fmt.Println(gpy.Pinyin(hans, a))
 	// Output: [[zhong] [guo] [ren] [a] [i] [u]]
 }
 
 func ExampleLazygpy() {
 	hans := "中国人"
 	a := gpy.NewArgs()
-	fmt.Println(gpy.Lazygpy(hans, a))
+	fmt.Println(gpy.LazyPinyin(hans, a))
 	// Output: [zhong guo ren]
 }
 

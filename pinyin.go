@@ -270,7 +270,7 @@ func Pinyin(s string, a Args) [][]string {
 	for i := 0; i < len(py); i++ {
 		var (
 			pyarr []string
-			cs    int64 = 0
+			cs    int64
 		)
 
 		for _, r := range py[i] {
