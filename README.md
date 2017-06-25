@@ -1,5 +1,4 @@
 # gpy
-=========
 
 [![Build Status](https://travis-ci.org/go-ego/gpy.svg?branch=master)](https://travis-ci.org/go-ego/gpy)
 [![Coverage Status](https://coveralls.io/repos/github.com/go-ego/gpy/badge.svg?branch=master)](https://coveralls.io/r/github.com/go-ego/gpy?branch=master)
@@ -9,14 +8,13 @@
 汉语拼音转换工具 Go 版。
 
 
-Installation
-------------
+## Installation
 
 ```
 go get -u github.com/go-ego/gpy
 ```
 
-install CLI tool:
+### install CLI tool:
 
 ```
 go get -u github.com/go-ego/gpy/pinyin
@@ -25,15 +23,13 @@ zhōng guó rén
 ```
 
 
-Documentation
---------------
+## Documentation
 
 API documentation can be found here:
 https://godoc.org/github.com/go-ego/gpy
 
 
-Usage
-------
+## Usage
 
 ```go
 package main
@@ -82,15 +78,13 @@ func main() {
 ```
 
 
-Related Projects
------------------
+## Related Projects
 
 * [hotoo/pinyin](https://github.com/hotoo/pinyin): 汉语拼音转换工具 Node.js/JavaScript 版。
 * [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): 汉语拼音转换工具 Python 版。
 * [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): 汉语拼音转换工具 Rust 版。
 
 
-License
----------
+## License
 
 Under the MIT License, base on [go-pinyin](https://github.com/go-ego/gpy).
