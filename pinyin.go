@@ -227,6 +227,8 @@ func SinglePinyin(r rune, a Args) []string {
 	return pys
 }
 
+// IsChineseChar to determine whether the Chinese string
+// 判断是否为中文字符串
 func IsChineseChar(str string) bool {
 	for _, r := range str {
 		if unicode.Is(unicode.Scripts["Han"], r) {

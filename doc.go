@@ -1,7 +1,11 @@
 /*
-package gpy : 汉语拼音转换工具.
 
-Usage
+Package gpy : Chinese Pinyin conversion tool; 汉语拼音转换工具.
+
+Installation:
+	go get -u github.com/go-ego/gse
+
+Usage :
 
 	package main
 
@@ -36,5 +40,6 @@ Usage
 		fmt.Println(gpy.Pinyin(hans, a))
 		// [[zho1ng zho4ng] [guo2] [re2n]]
 	}
+
 */
 package gpy
