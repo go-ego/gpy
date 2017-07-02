@@ -11,6 +11,7 @@ Usage :
 
 	import (
 		"fmt"
+
 		"github.com/go-ego/gpy"
 	)
 
@@ -40,6 +41,5 @@ Usage :
 		fmt.Println(gpy.Pinyin(hans, a))
 		// [[zho1ng zho4ng] [guo2] [re2n]]
 	}
-
 */
 package gpy
