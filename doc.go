@@ -13,7 +13,7 @@
 Package gpy : Chinese Pinyin conversion tool; 汉语拼音转换工具.
 
 Installation:
-	go get -u github.com/go-ego/gse
+	go get -u github.com/go-ego/gpy
 
 Usage :
 
