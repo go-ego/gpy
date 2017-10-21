@@ -26,7 +26,7 @@ zhōng guó rén
 ## Documentation
 
 API documentation can be found here:
-https://godoc.org/github.com/go-ego/gpy
+[godoc](https://godoc.org/github.com/go-ego/gpy)
 
 
 ## Usage
