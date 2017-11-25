@@ -1,0 +1,17 @@
+{
+	"comment": "",
+	"ignore": "",
+	"package": [
+		{
+			"checksumSHA1": "qmf2OPIdr1nS6FGwGndELHFXHFU=",
+			"path": "github.com/mattn/go-isatty",
+			"revision": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c",
+			"revisionTime": "2017-11-07T05:05:31Z"
+		},
+		{
+			"path": "golang.org/x/sys/unix",
+			"revision": ""
+		}
+	],
+	"rootPath": "github.com/go-ego/gpy"
+}
