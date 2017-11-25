@@ -165,8 +165,17 @@ func TestPinyin(t *testing.T) {
 
 func TestNoneHans(t *testing.T) {
 	s := "abc"
-	v := Pinyin(s, NewArgs())
+	v := HanPinyin(s, NewArgs())
 	value := [][]string{}
+	if !reflect.DeepEqual(v, value) {
+		t.Errorf("Expected %s, got %s", value, v)
+	}
+}
+
+func TestNone(t *testing.T) {
+	s := "abc"
+	v := Pinyin(s, NewArgs())
+	value := [][]string{[]string{"abc"}}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
@@ -271,7 +280,7 @@ func TestFallback(t *testing.T) {
 			},
 		},
 	}
-	testPinyin(t, hans, testData, Pinyin)
+	testPinyin(t, hans, testData, HanPinyin)
 }
 
 type testItem struct {

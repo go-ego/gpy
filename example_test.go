@@ -19,10 +19,10 @@ func ExamplePinyin_default() {
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
-func ExamplePinyinN_default() {
+func ExampleHanPinyin_default() {
 	hans := "中国人"
 	a := gpy.NewArgs()
-	fmt.Println("default:", gpy.PinyinN(hans, a))
+	fmt.Println("default:", gpy.HanPinyin(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
@@ -105,7 +105,7 @@ func ExamplePinyin_fallbackCustom1() {
 	a.Fallback = func(r rune, a gpy.Args) []string {
 		return []string{string(r + 1)}
 	}
-	fmt.Println(gpy.Pinyin(hans, a))
+	fmt.Println(gpy.HanPinyin(hans, a))
 	// Output: [[zhong] [guo] [ren] [b] [c] [d]]
 }
 
@@ -125,7 +125,7 @@ func ExamplePinyin_fallbackCustom2() {
 			return []string{}
 		}
 	}
-	fmt.Println(gpy.Pinyin(hans, a))
+	fmt.Println(gpy.HanPinyin(hans, a))
 	// Output: [[zhong] [guo] [ren] [a] [i] [u]]
 }
 
