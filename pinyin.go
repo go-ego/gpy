@@ -9,9 +9,14 @@ import (
 
 // Meta
 const (
-	Version = "0.12.0"
+	version = "0.10.0.29"
 	// License   = "MIT"
 )
+
+// GetVersion get version
+func GetVersion() string {
+	return version
+}
 
 // 拼音风格(推荐)
 const (
