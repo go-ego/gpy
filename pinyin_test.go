@@ -175,7 +175,7 @@ func TestNoneHans(t *testing.T) {
 func TestNone(t *testing.T) {
 	s := "abc"
 	v := Pinyin(s, NewArgs())
-	value := [][]string{[]string{"abc"}}
+	value := [][]string{{"abc"}}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}

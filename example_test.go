@@ -129,7 +129,7 @@ func ExamplePinyin_fallbackCustom2() {
 	// Output: [[zhong] [guo] [ren] [a] [i] [u]]
 }
 
-func ExampleLazygpy() {
+func ExampleLazyPinyin() {
 	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println(gpy.LazyPinyin(hans, a))
