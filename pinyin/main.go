@@ -11,25 +11,12 @@ import (
 	"github.com/mattn/go-isatty"
 )
 
-func main() {
-	heteronym := flag.Bool("e", false, "启用多音字模式")
-	style := flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3")
-	flag.Parse()
-	hans := flag.Args()
-	stdin := []byte{}
-	if !isatty.IsTerminal(os.Stdin.Fd()) {
-		stdin, _ = ioutil.ReadAll(os.Stdin)
-	}
-	if len(stdin) > 0 {
-		hans = append(hans, string(stdin))
-	}
+var (
+	heteronym = flag.Bool("e", false, "启用多音字模式")
+	style     = flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3")
+)
 
-	if len(hans) == 0 {
-		fmt.Println("请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
-		os.Exit(1)
-	}
-
-	args := gpy.NewArgs()
+func selectArgs(args gpy.Args) {
 	if *heteronym {
 		args.Heteronym = true
 	}
@@ -55,6 +42,26 @@ func main() {
 	default:
 		args.Style = gpy.Tone
 	}
+}
+
+func main() {
+	flag.Parse()
+	hans := flag.Args()
+	stdin := []byte{}
+	if !isatty.IsTerminal(os.Stdin.Fd()) {
+		stdin, _ = ioutil.ReadAll(os.Stdin)
+	}
+	if len(stdin) > 0 {
+		hans = append(hans, string(stdin))
+	}
+
+	if len(hans) == 0 {
+		fmt.Println("请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
+		os.Exit(1)
+	}
+
+	args := gpy.NewArgs()
+	selectArgs(args)
 
 	pys := gpy.Pinyin(strings.Join(hans, ""), args)
 	for _, s := range pys {
