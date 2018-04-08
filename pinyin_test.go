@@ -5,11 +5,13 @@ import (
 	"testing"
 )
 
-type pinyinFunc func(string, Args) [][]string
-type testCase struct {
-	args   Args
-	result [][]string
-}
+type (
+	pinyinFunc func(string, Args) [][]string
+	testCase   struct {
+		args   Args
+		result [][]string
+	}
+)
 
 func testPinyin(t *testing.T, s string, d []testCase, f pinyinFunc) {
 	for _, tc := range d {
