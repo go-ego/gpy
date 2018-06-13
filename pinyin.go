@@ -33,16 +33,16 @@ const (
 )
 
 // 拼音风格(兼容之前的版本)
-const (
-	NORMAL       = Normal
-	TONE         = Tone
-	TONE2        = Tone2
-	INITIALS     = Initials
-	FIRST_LETTER = FirstLetter
-	FINALS       = Finals
-	FINALS_TONE  = FinalsTone
-	FINALS_TONE2 = FinalsTone2
-)
+// const (
+// 	NORMAL       = Normal
+// 	TONE         = Tone
+// 	TONE2        = Tone2
+// 	INITIALS     = Initials
+// 	FIRST_LETTER = FirstLetter
+// 	FINALS       = Finals
+// 	FINALS_TONE  = FinalsTone
+// 	FINALS_TONE2 = FinalsTone2
+// )
 
 var (
 	// 声母表
