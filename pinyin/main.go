@@ -13,7 +13,10 @@ import (
 
 var (
 	heteronym = flag.Bool("e", false, "启用多音字模式")
-	style     = flag.String("s", "Tone", "指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3")
+
+	str = `指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, 
+	FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3`
+	style = flag.String("s", "Tone", str)
 )
 
 func selectArgs(args gpy.Args) {
