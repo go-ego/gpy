@@ -6,28 +6,26 @@ import (
 	"github.com/go-ego/gpy"
 )
 
+var hans = "中国人"
+
 func ExampleConvert() {
-	hans := "中国人"
 	fmt.Println("default:", gpy.Convert(hans, nil))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
 func ExamplePinyin_default() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println("default:", gpy.Pinyin(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
 func ExampleHanPinyin_default() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println("default:", gpy.HanPinyin(hans, a))
 	// Output: default: [[zhong] [guo] [ren]]
 }
 
 func ExamplePinyin_normal() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Normal
 	fmt.Println("Normal:", gpy.Pinyin(hans, a))
@@ -35,7 +33,6 @@ func ExamplePinyin_normal() {
 }
 
 func ExamplePinyin_tone() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Tone
 	fmt.Println("Tone:", gpy.Pinyin(hans, a))
@@ -43,7 +40,6 @@ func ExamplePinyin_tone() {
 }
 
 func ExamplePinyin_tone2() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Tone2
 	fmt.Println("Tone2:", gpy.Pinyin(hans, a))
@@ -51,7 +47,6 @@ func ExamplePinyin_tone2() {
 }
 
 func ExamplePinyin_initials() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Initials
 	fmt.Println("Initials:", gpy.Pinyin(hans, a))
@@ -59,7 +54,6 @@ func ExamplePinyin_initials() {
 }
 
 func ExamplePinyin_firstLetter() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FirstLetter
 	fmt.Println(gpy.Pinyin(hans, a))
@@ -67,7 +61,6 @@ func ExamplePinyin_firstLetter() {
 }
 
 func ExamplePinyin_finals() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.Finals
 	fmt.Println(gpy.Pinyin(hans, a))
@@ -75,7 +68,6 @@ func ExamplePinyin_finals() {
 }
 
 func ExamplePinyin_finalsTone() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone
 	fmt.Println(gpy.Pinyin(hans, a))
@@ -83,7 +75,6 @@ func ExamplePinyin_finalsTone() {
 }
 
 func ExamplePinyin_finalsTone2() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Style = gpy.FinalsTone2
 	fmt.Println(gpy.Pinyin(hans, a))
@@ -91,7 +82,6 @@ func ExamplePinyin_finalsTone2() {
 }
 
 func ExamplePinyin_heteronym() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	a.Heteronym = true
 	a.Style = gpy.Tone2
@@ -130,14 +120,12 @@ func ExamplePinyin_fallbackCustom2() {
 }
 
 func ExampleLazyPinyin() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println(gpy.LazyPinyin(hans, a))
 	// Output: [zhong guo ren]
 }
 
 func ExampleSlug() {
-	hans := "中国人"
 	a := gpy.NewArgs()
 	fmt.Println(gpy.Slug(hans, a))
 	// Output: zhong-guo-ren

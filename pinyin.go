@@ -283,7 +283,7 @@ func Pinyin(s string, a Args) [][]string {
 	py := strings.Split(s, " ")
 	for i := 0; i < len(py); i++ {
 		var (
-			pyarr []string
+			pyArr []string
 			cs    int64
 		)
 
@@ -294,8 +294,8 @@ func Pinyin(s string, a Args) [][]string {
 			}
 		}
 		if cs == 0 {
-			pyarr = append(pyarr, py[i])
-			pys = append(pys, pyarr)
+			pyArr = append(pyArr, py[i])
+			pys = append(pys, pyArr)
 		}
 	}
 

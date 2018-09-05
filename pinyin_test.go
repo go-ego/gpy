@@ -5,6 +5,8 @@ import (
 	"testing"
 )
 
+var hans = "中国人"
+
 type (
 	pinyinFunc func(string, Args) [][]string
 	testCase   struct {
@@ -23,34 +25,27 @@ func testPinyin(t *testing.T, s string, d []testCase, f pinyinFunc) {
 }
 
 func TestPinyin(t *testing.T) {
-	hans := "中国人"
+	var pyStr = [][]string{
+		{"zhong"},
+		{"guo"},
+		{"ren"},
+	}
+
 	testData := []testCase{
 		// default
 		{
 			Args{Style: Normal},
-			[][]string{
-				{"zhong"},
-				{"guo"},
-				{"ren"},
-			},
+			pyStr,
 		},
 		// default
 		{
 			NewArgs(),
-			[][]string{
-				{"zhong"},
-				{"guo"},
-				{"ren"},
-			},
+			pyStr,
 		},
 		// Normal
 		{
 			Args{Style: Normal},
-			[][]string{
-				{"zhong"},
-				{"guo"},
-				{"ren"},
-			},
+			pyStr,
 		},
 		// Tone
 		{
@@ -147,7 +142,7 @@ func TestPinyin(t *testing.T) {
 	testPinyin(t, hans, testData, Pinyin)
 
 	// 测试不是多音字的 Heteronym
-	hans = "你"
+	hans := "你"
 	testData = []testCase{
 		{
 			Args{},
@@ -184,15 +179,14 @@ func TestNone(t *testing.T) {
 }
 
 func TestLazyPinyin(t *testing.T) {
-	s := "中国人"
-	v := LazyPinyin(s, Args{})
+	v := LazyPinyin(hans, Args{})
 	value := []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
-	s = "中国人abc"
-	v = LazyPinyin(s, Args{})
+	hans := "中国人abc"
+	v = LazyPinyin(hans, Args{})
 	value = []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
@@ -200,28 +194,27 @@ func TestLazyPinyin(t *testing.T) {
 }
 
 func TestSlug(t *testing.T) {
-	s := "中国人"
-	v := Slug(s, Args{})
+	v := Slug(hans, Args{})
 	value := "zhongguoren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
-	v = Slug(s, Args{Separator: ","})
+	v = Slug(hans, Args{Separator: ","})
 	value = "zhong,guo,ren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
 	a := NewArgs()
-	v = Slug(s, a)
+	v = Slug(hans, a)
 	value = "zhong-guo-ren"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
-	s = "中国人abc，,中"
-	v = Slug(s, a)
+	hans := "中国人abc，,中"
+	v = Slug(hans, a)
 	value = "zhong-guo-ren-zhong"
 	if v != value {
 		t.Errorf("Expected %s, got %s", value, v)
@@ -373,30 +366,28 @@ func TestUpdated(t *testing.T) {
 }
 
 func TestConvert(t *testing.T) {
-	s := "中国人"
-	v := Convert(s, nil)
+	v := Convert(hans, nil)
 	value := [][]string{{"zhong"}, {"guo"}, {"ren"}}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
 	a := NewArgs()
-	v = Convert(s, &a)
+	v = Convert(hans, &a)
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 }
 
 func TestLazyConvert(t *testing.T) {
-	s := "中国人"
-	v := LazyConvert(s, nil)
+	v := LazyConvert(hans, nil)
 	value := []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
 
 	a := NewArgs()
-	v = LazyConvert(s, &a)
+	v = LazyConvert(hans, &a)
 	if !reflect.DeepEqual(v, value) {
 		t.Errorf("Expected %s, got %s", value, v)
 	}
