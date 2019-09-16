@@ -1,0 +1,8 @@
+github.com/go-ego/gpy v0.0.0-20190916174251-3c9bb25ec350 h1:4EI/8QL7eekOs4J1dEZtC+7RYFgPCX6Th9Tek4j3tiQ=
+github.com/go-ego/gpy v0.0.0-20190916174251-3c9bb25ec350/go.mod h1:lqaLazJtabxbXJ9kKHIJ3vQLY3LBh1ELVLpKxa7FTWQ=
+github.com/mattn/go-isatty v0.0.4/go.mod h1:M+lRXTBqGeGNdLjl/ufCoiOlB5xdOkqRJdNxMWT7Zi4=
+github.com/mattn/go-isatty v0.0.9 h1:d5US/mDsogSGW37IV293h//ZFaeajb69h+EHFsv2xGg=
+github.com/mattn/go-isatty v0.0.9/go.mod h1:YNRxwqDuOph6SZLI9vUUz6OYw3QyUt7WiY2yME+cCiQ=
+golang.org/x/sys v0.0.0-20190813064441-fde4db37ae7a/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
+golang.org/x/sys v0.0.0-20190916165910-8a69140bde95 h1:fssfdyfIxP8slcYeB1BnYuvJgq8Q6Q9aQwNBN2IDY/E=
+golang.org/x/sys v0.0.0-20190916165910-8a69140bde95/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

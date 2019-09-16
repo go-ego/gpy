@@ -2,7 +2,7 @@
 .DS_Store
 .vscode
 .idea
-pinyin/pinyin
+tools/pinyin/pinyin
 
 # Debug files
 *.dSYM/
