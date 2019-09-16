@@ -19,8 +19,8 @@ before_install:
   - go get -u github.com/mattn/goveralls
 
 script:
-  - go run pinyin/main.go abc
-  - go run pinyin/main.go -s Normal abc
-  - echo "abc" | go run pinyin/main.go
-  - echo "abc" > abc.txt && go run pinyin/main.go < abc.txt
+  - go run tools/pinyin/main.go abc
+  - go run tools/pinyin/main.go -s Normal abc
+  - echo "abc" | go run tools/pinyin/main.go
+  - echo "abc" > abc.txt && go run tools/pinyin/main.go < abc.txt
   # - $HOME/gopath/bin/goveralls -service=travis-ci -v -package .
