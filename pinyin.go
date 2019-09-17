@@ -262,7 +262,7 @@ func HanPinyin(s string, a Args) [][]string {
 	return pys
 }
 
-// Pinyin 汉字转拼音，支持多音字模式和拼音与英文等字母混合.
+// Pinyin 汉字转拼音，支持多音字模式、拼音与英文等字母混合.
 func Pinyin(s string, a Args) [][]string {
 	pys := [][]string{}
 	for _, r := range s {
