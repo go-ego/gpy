@@ -61,6 +61,7 @@ func parseCmdArgs() cmdArgs {
 func main() {
 	args := parseCmdArgs()
 	usage := "gen_pinyin_dict INPUT OUTPUT"
+
 	inputFile := args.inputFile
 	outputFile := args.outputFile
 	if inputFile == "" || outputFile == "" {
@@ -73,11 +74,13 @@ func main() {
 		fmt.Printf("open file %s error", inputFile)
 		panic(err)
 	}
+
 	outFp, err := os.Create(outputFile)
 	if err != nil {
 		fmt.Printf("open file %s error", outputFile)
 		panic(err)
 	}
+
 	defer inFp.Close()
 	defer outFp.Close()
 
