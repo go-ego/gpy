@@ -9,13 +9,14 @@ import (
 
 // Meta
 const (
-	version = "v0.10.0.53"
+	// Verison get the gpy version
+	Version = "v0.10.0.54"
 	// License   = "MIT"
 )
 
-// GetVersion get version
+// GetVersion get the version
 func GetVersion() string {
-	return version
+	return Version
 }
 
 // 拼音风格(推荐)
