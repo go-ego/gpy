@@ -23,27 +23,25 @@ func selectArgs(args gpy.Args) {
 	if *heteronym {
 		args.Heteronym = true
 	}
-	switch *style {
-	case "Normal":
-		args.Style = gpy.Normal
-	case "Tone2":
-		args.Style = gpy.Tone2
-	case "Tone3":
-		args.Style = gpy.Tone3
-	case "Initials":
-		args.Style = gpy.Initials
-	case "FirstLetter":
-		args.Style = gpy.FirstLetter
-	case "Finals":
-		args.Style = gpy.Finals
-	case "FinalsTone":
-		args.Style = gpy.FinalsTone
-	case "FinalsTone2":
-		args.Style = gpy.FinalsTone2
-	case "FinalsTone3":
-		args.Style = gpy.FinalsTone3
-	default:
-		args.Style = gpy.Tone
+
+	styleValues := map[string]int{
+		"zhao":  gpy.Normal,
+		"zh4ao": gpy.Tone,
+		"zha4o": gpy.Tone2,
+		"zhao4": gpy.Tone3,
+		"zh":    gpy.Initials,
+		"z":     gpy.FirstLetter,
+		"ao":    gpy.Finals,
+		"4ao":   gpy.FinalsTone,
+		"a4o":   gpy.FinalsTone2,
+		"ao4":   gpy.FinalsTone3,
+	}
+
+	if value, ok := styleValues[*style]; !ok {
+		fmt.Fprintf(os.Stderr, "无效的拼音风格：%s\n", *style)
+		os.Exit(1)
+	} else {
+		args.Style = value
 	}
 }
 
@@ -59,7 +57,7 @@ func main() {
 	}
 
 	if len(hans) == 0 {
-		fmt.Println("请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
+		fmt.Fprintln(os.Stderr, "请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
 		os.Exit(1)
 	}
 
