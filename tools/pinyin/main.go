@@ -16,7 +16,8 @@ var (
 
 	str = `指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, 
 	FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3`
-	style = flag.String("s", "Tone", str)
+
+	style = flag.String("s", "zh4ao", str)
 )
 
 func selectArgs(args gpy.Args) {
@@ -48,6 +49,7 @@ func selectArgs(args gpy.Args) {
 func main() {
 	flag.Parse()
 	hans := flag.Args()
+
 	stdin := []byte{}
 	if !isatty.IsTerminal(os.Stdin.Fd()) {
 		stdin, _ = ioutil.ReadAll(os.Stdin)
