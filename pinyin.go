@@ -9,8 +9,8 @@ import (
 
 // Meta
 const (
-	// Verison get the gpy version
-	Version = "v0.10.0.54"
+	// Version get the gpy version
+	Version = "v0.10.0.60"
 	// License   = "MIT"
 )
 
