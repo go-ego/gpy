@@ -15,7 +15,7 @@ type (
 	}
 )
 
-func testPinyin(t *testing.T, s string, d []testCase, f pinyinFunc) {
+func testPinyinTool(t *testing.T, s string, d []testCase, f pinyinFunc) {
 	for _, tc := range d {
 		v := f(s, tc.args)
 		if !reflect.DeepEqual(v, tc.result) {
@@ -139,7 +139,7 @@ func TestPinyin(t *testing.T) {
 		},
 	}
 
-	testPinyin(t, hans, testData, Pinyin)
+	testPinyinTool(t, hans, testData, Pinyin)
 
 	// 测试不是多音字的 Heteronym
 	hans := "你"
@@ -157,7 +157,7 @@ func TestPinyin(t *testing.T) {
 			},
 		},
 	}
-	testPinyin(t, hans, testData, Pinyin)
+	testPinyinTool(t, hans, testData, Pinyin)
 }
 
 func TestNoneHans(t *testing.T) {
@@ -275,7 +275,7 @@ func TestFallback(t *testing.T) {
 			},
 		},
 	}
-	testPinyin(t, hans, testData, HanPinyin)
+	testPinyinTool(t, hans, testData, HanPinyin)
 }
 
 type testItem struct {
@@ -284,7 +284,7 @@ type testItem struct {
 	result [][]string
 }
 
-func testPinyinUpdate(t *testing.T, d []testItem, f pinyinFunc) {
+func testPinyinToolUpdate(t *testing.T, d []testItem, f pinyinFunc) {
 	for _, tc := range d {
 		v := f(tc.hans, tc.args)
 		if !reflect.DeepEqual(v, tc.result) {
@@ -362,7 +362,7 @@ func TestUpdated(t *testing.T) {
 		{"侵略", Args{Style: FinalsTone2}, [][]string{{"i1n"}, {"ve4"}}},
 		{"侵略", Args{Style: FinalsTone3}, [][]string{{"in1"}, {"ve4"}}},
 	}
-	testPinyinUpdate(t, testData, Pinyin)
+	testPinyinToolUpdate(t, testData, Pinyin)
 }
 
 func TestConvert(t *testing.T) {
