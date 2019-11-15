@@ -42,6 +42,15 @@ func benchmarkPinyin(b *testing.B, s string, args Args) {
 	}
 }
 
+func benchmarkHanPinyin(b *testing.B, s string, args Args) {
+	b.StopTimer()
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		HanPinyin(s, args)
+	}
+}
+
 func benchmarkLazyPinyin(b *testing.B, s string, args Args) {
 	b.StopTimer()
 	b.StartTimer()
@@ -59,6 +68,16 @@ func BenchmarkPinyinOne(b *testing.B) {
 func BenchmarkPinyin500(b *testing.B) {
 	args := NewArgs()
 	benchmarkPinyin(b, hans500, args)
+}
+
+func BenchmarkHanPinyinOne(b *testing.B) {
+	args := NewArgs()
+	benchmarkHanPinyin(b, "中", args)
+}
+
+func BenchmarkHanPinyin500(b *testing.B) {
+	args := NewArgs()
+	benchmarkHanPinyin(b, hans500, args)
 }
 
 func BenchmarkLazyPinyinOne(b *testing.B) {
