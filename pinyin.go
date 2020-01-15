@@ -5,6 +5,8 @@ import (
 	"regexp"
 	"strings"
 	"unicode"
+
+	"github.com/go-ego/gse"
 )
 
 // Meta
@@ -163,7 +165,7 @@ func handleYW(p string) string {
 	return p
 }
 
-func toFixed(p string, a Args) string {
+func ToFixed(p string, a Args) string {
 	if a.Style == Initials {
 		return initial(p)
 	}
@@ -213,7 +215,7 @@ func toFixed(p string, a Args) string {
 func applyStyle(p []string, a Args) []string {
 	newP := []string{}
 	for _, v := range p {
-		newP = append(newP, toFixed(v, a))
+		newP = append(newP, ToFixed(v, a))
 	}
 	return newP
 }
@@ -266,37 +268,19 @@ func HanPinyin(s string, a Args) [][]string {
 // Pinyin 汉字转拼音，支持多音字模式、拼音与英文等字母混合.
 func Pinyin(s string, a Args) [][]string {
 	pys := [][]string{}
-	for _, r := range s {
-		if unicode.Is(unicode.Scripts["Han"], r) {
-			// if r {
-			// }
-			py := SinglePinyin(r, a)
+	sw := gse.SplitTextToWords([]byte(s))
+	for i := 0; i < len(sw); i++ {
+		s1 := string([]byte(sw[i]))
+		r := []rune(s1)
+		if len(r) <= 1 && unicode.Is(unicode.Scripts["Han"], r[0]) {
+			py := SinglePinyin(r[0], a)
 			if len(py) > 0 {
 				pys = append(pys, py)
 			}
-		}
-		// else {
-		// 	py := strings.Split(s, " ")
-		// 	fmt.Println(py)
-		// }
-	}
-
-	py := strings.Split(s, " ")
-	for i := 0; i < len(py); i++ {
-		var (
-			pyArr []string
-			cs    int64
-		)
-
-		for _, r := range py[i] {
-			if unicode.Is(unicode.Scripts["Han"], r) {
-				// continue
-				cs++
-			}
-		}
-		if cs == 0 {
-			pyArr = append(pyArr, py[i])
-			pys = append(pys, pyArr)
+		} else {
+			var pya []string
+			pya = append(pya, s1)
+			pys = append(pys, pya)
 		}
 	}
 
@@ -308,7 +292,7 @@ func Pinyin(s string, a Args) [][]string {
 func LazyPinyin(s string, a Args) []string {
 	a.Heteronym = false
 	pys := []string{}
-	for _, v := range Pinyin(s, a) {
+	for _, v := range HanPinyin(s, a) {
 		pys = append(pys, v[0])
 	}
 	return pys
