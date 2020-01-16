@@ -8,8 +8,9 @@ import (
 var hans = "中国人"
 
 type (
-	pinyinFunc func(string, Args) [][]string
-	testCase   struct {
+	pinyinFunc func(string, ...Args) [][]string
+
+	testCase struct {
 		args   Args
 		result [][]string
 	}
