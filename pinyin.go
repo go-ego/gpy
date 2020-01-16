@@ -254,7 +254,9 @@ func IsChineseChar(str string) bool {
 }
 
 // HanPinyin 汉字转拼音，支持多音字模式.
-func HanPinyin(s string, a Args) [][]string {
+func HanPinyin(s string, arg ...Args) [][]string {
+	a := args(arg...)
+
 	pys := [][]string{}
 	for _, r := range s {
 		py := SinglePinyin(r, a)
@@ -265,8 +267,19 @@ func HanPinyin(s string, a Args) [][]string {
 	return pys
 }
 
+func args(arg ...Args) Args {
+	a := NewArgs()
+	if len(arg) > 0 {
+		a = arg[0]
+	}
+
+	return a
+}
+
 // Pinyin 汉字转拼音，支持多音字模式、拼音与英文等字母混合.
-func Pinyin(s string, a Args) [][]string {
+func Pinyin(s string, arg ...Args) [][]string {
+	a := args(arg...)
+
 	pys := [][]string{}
 	sw := gse.SplitTextToWords([]byte(s))
 	for i := 0; i < len(sw); i++ {
@@ -289,7 +302,9 @@ func Pinyin(s string, a Args) [][]string {
 
 // LazyPinyin 汉字转拼音，与 `Pinyin` 的区别是：
 // 返回值类型不同，并且不支持多音字模式，每个汉字只取第一个音.
-func LazyPinyin(s string, a Args) []string {
+func LazyPinyin(s string, arg ...Args) []string {
+	a := args(arg...)
+
 	a.Heteronym = false
 	pys := []string{}
 	for _, v := range HanPinyin(s, a) {
