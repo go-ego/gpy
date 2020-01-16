@@ -253,6 +253,15 @@ func IsChineseChar(str string) bool {
 	return false
 }
 
+func args(arg ...Args) Args {
+	a := NewArgs()
+	if len(arg) > 0 {
+		a = arg[0]
+	}
+
+	return a
+}
+
 // HanPinyin 汉字转拼音，支持多音字模式.
 func HanPinyin(s string, arg ...Args) [][]string {
 	a := args(arg...)
@@ -265,15 +274,6 @@ func HanPinyin(s string, arg ...Args) [][]string {
 		}
 	}
 	return pys
-}
-
-func args(arg ...Args) Args {
-	a := NewArgs()
-	if len(arg) > 0 {
-		a = arg[0]
-	}
-
-	return a
 }
 
 // Pinyin 汉字转拼音，支持多音字模式、拼音与英文等字母混合.
@@ -298,6 +298,32 @@ func Pinyin(s string, arg ...Args) [][]string {
 	}
 
 	return pys
+}
+
+// ToString trans pinyin [][]string to string
+func ToString(p [][]string) (s string) {
+	i := 0
+	for _, p1 := range p {
+		r := []rune(p1[0])[0]
+		i++
+
+		if unicode.IsLetter(r) && i > 1 {
+			s += " " + p1[0]
+		} else {
+			if i > 1 || unicode.IsSpace(r) {
+				i = 0
+			}
+			s += p1[0]
+		}
+	}
+
+	return
+}
+
+// Py return to string pinyin
+func Py(s string, a ...Args) string {
+	p := Pinyin(s, a...)
+	return ToString(p)
 }
 
 // LazyPinyin 汉字转拼音，与 `Pinyin` 的区别是：
