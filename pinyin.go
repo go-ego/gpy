@@ -12,7 +12,7 @@ import (
 // Meta
 const (
 	// Version get the gpy version
-	Version = "v0.10.0.60"
+	Version = "v0.20.0.72"
 	// License   = "MIT"
 )
 
@@ -165,6 +165,7 @@ func handleYW(p string) string {
 	return p
 }
 
+// ToFixed fixed pinyin style
 func ToFixed(p string, a Args) string {
 	if a.Style == Initials {
 		return initial(p)
@@ -285,7 +286,7 @@ func Pinyin(s string, arg ...Args) [][]string {
 	for i := 0; i < len(sw); i++ {
 		s1 := string([]byte(sw[i]))
 		r := []rune(s1)
-		if len(r) <= 1 && unicode.Is(unicode.Scripts["Han"], r[0]) {
+		if len(r) <= 1 && unicode.Is(unicode.Han, r[0]) {
 			py := SinglePinyin(r[0], a)
 			if len(py) > 0 {
 				pys = append(pys, py)
