@@ -3,6 +3,8 @@ package gpy
 import (
 	"reflect"
 	"testing"
+
+	"github.com/vcaesar/tt"
 )
 
 var hans = "中国人"
@@ -190,44 +192,34 @@ func TestLazyPinyin(t *testing.T) {
 	v = LazyPinyin(hans, Args{})
 	value = []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
+		tt.Equal(t, value, v)
 	}
 }
 
 func TestSlug(t *testing.T) {
 	v := Slug(hans, Args{})
 	value := "zhongguoren"
-	if v != value {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.Equal(t, value, v)
 
 	v = Slug(hans, Args{Separator: ","})
 	value = "zhong,guo,ren"
-	if v != value {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.Equal(t, value, v)
 
 	a := NewArgs()
 	v = Slug(hans, a)
 	value = "zhong-guo-ren"
-	if v != value {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.Equal(t, value, v)
 
 	hans := "中国人abc，,中"
 	v = Slug(hans, a)
 	value = "zhong-guo-ren-zhong"
-	if v != value {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.Equal(t, value, v)
 }
 
 func TestFinal(t *testing.T) {
 	value := "an"
 	v := final("an")
-	if v != value {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.Equal(t, value, v)
 }
 
 func TestFallback(t *testing.T) {
@@ -289,7 +281,7 @@ func testPinyinToolUpdate(t *testing.T, d []testItem, f pinyinFunc) {
 	for _, tc := range d {
 		v := f(tc.hans, tc.args)
 		if !reflect.DeepEqual(v, tc.result) {
-			t.Errorf("Expected %s, got %s", tc.result, v)
+			tt.Equal(t, tc.result, v)
 		}
 	}
 }
@@ -376,7 +368,7 @@ func TestConvert(t *testing.T) {
 	a := NewArgs()
 	v = Convert(hans, &a)
 	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
+		tt.Equal(t, value, v)
 	}
 }
 
@@ -384,12 +376,18 @@ func TestLazyConvert(t *testing.T) {
 	v := LazyConvert(hans, nil)
 	value := []string{"zhong", "guo", "ren"}
 	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
+		tt.Equal(t, value, v)
 	}
 
 	a := NewArgs()
 	v = LazyConvert(hans, &a)
 	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
+		tt.Equal(t, value, v)
 	}
+}
+
+func TestPy(t *testing.T) {
+	v1 := "zhong guo ren"
+	v := Py(hans)
+	tt.Equal(t, v1, v)
 }
