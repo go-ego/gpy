@@ -1,7 +1,6 @@
 package gpy
 
 import (
-	"reflect"
 	"testing"
 
 	"github.com/vcaesar/tt"
@@ -21,9 +20,7 @@ type (
 func testPinyinTool(t *testing.T, s string, d []testCase, f pinyinFunc) {
 	for _, tc := range d {
 		v := f(s, tc.args)
-		if !reflect.DeepEqual(v, tc.result) {
-			t.Errorf("Expected %s, got %s", tc.result, v)
-		}
+		tt.DEqual(t, tc.result, v)
 	}
 }
 
@@ -167,33 +164,25 @@ func TestNoneHans(t *testing.T) {
 	s := "abc"
 	v := HanPinyin(s, NewArgs())
 	value := [][]string{}
-	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.DEqual(t, value, v)
 }
 
 func TestNone(t *testing.T) {
 	s := "abc"
 	v := Pinyin(s, NewArgs())
 	value := [][]string{{"abc"}}
-	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.DEqual(t, value, v)
 }
 
 func TestLazyPinyin(t *testing.T) {
 	v := LazyPinyin(hans, Args{})
 	value := []string{"zhong", "guo", "ren"}
-	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.DEqual(t, value, v)
 
 	hans := "中国人abc"
 	v = LazyPinyin(hans, Args{})
 	value = []string{"zhong", "guo", "ren"}
-	if !reflect.DeepEqual(v, value) {
-		tt.Equal(t, value, v)
-	}
+	tt.DEqual(t, value, v)
 }
 
 func TestSlug(t *testing.T) {
@@ -277,12 +266,10 @@ type testItem struct {
 	result [][]string
 }
 
-func testPinyinToolUpdate(t *testing.T, d []testItem, f pinyinFunc) {
+func testPinyinToolUpdate(t *testing.T, d []testItem, f pinyinFunc, call string) {
 	for _, tc := range d {
 		v := f(tc.hans, tc.args)
-		if !reflect.DeepEqual(v, tc.result) {
-			tt.Equal(t, tc.result, v)
-		}
+		tt.DEqual(t, tc.result, v, "", call)
 	}
 }
 
@@ -355,35 +342,27 @@ func TestUpdated(t *testing.T) {
 		{"侵略", Args{Style: FinalsTone2}, [][]string{{"i1n"}, {"ve4"}}},
 		{"侵略", Args{Style: FinalsTone3}, [][]string{{"in1"}, {"ve4"}}},
 	}
-	testPinyinToolUpdate(t, testData, Pinyin)
+	testPinyinToolUpdate(t, testData, Pinyin, "pinyin_test.go:345")
 }
 
 func TestConvert(t *testing.T) {
 	v := Convert(hans, nil)
 	value := [][]string{{"zhong"}, {"guo"}, {"ren"}}
-	if !reflect.DeepEqual(v, value) {
-		t.Errorf("Expected %s, got %s", value, v)
-	}
+	tt.DEqual(t, value, v)
 
 	a := NewArgs()
 	v = Convert(hans, &a)
-	if !reflect.DeepEqual(v, value) {
-		tt.Equal(t, value, v)
-	}
+	tt.DEqual(t, value, v)
 }
 
 func TestLazyConvert(t *testing.T) {
 	v := LazyConvert(hans, nil)
 	value := []string{"zhong", "guo", "ren"}
-	if !reflect.DeepEqual(v, value) {
-		tt.Equal(t, value, v)
-	}
+	tt.DEqual(t, value, v)
 
 	a := NewArgs()
 	v = LazyConvert(hans, &a)
-	if !reflect.DeepEqual(v, value) {
-		tt.Equal(t, value, v)
-	}
+	tt.DEqual(t, value, v)
 }
 
 func TestPy(t *testing.T) {
