@@ -42,6 +42,25 @@ func benchmarkPinyin(b *testing.B, s string, args Args) {
 	}
 }
 
+func benchmarkPinyinString(b *testing.B, s string, args Args) {
+	b.StopTimer()
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		py := Pinyin(s, args)
+		ToString(py)
+	}
+}
+
+func benchmarkPyString(b *testing.B, s string, args Args) {
+	b.StopTimer()
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		Py(s, args)
+	}
+}
+
 func benchmarkHanPinyin(b *testing.B, s string, args Args) {
 	b.StopTimer()
 	b.StartTimer()
@@ -65,9 +84,19 @@ func BenchmarkPinyinOne(b *testing.B) {
 	benchmarkPinyin(b, "中", args)
 }
 
-func BenchmarkPinyin500(b *testing.B) {
+func Benchmark_Pinyin_500(b *testing.B) {
 	args := NewArgs()
 	benchmarkPinyin(b, hans500, args)
+}
+
+func Benchmark_Pinyin_Sting_500(b *testing.B) {
+	args := NewArgs()
+	benchmarkPinyinString(b, hans500, args)
+}
+
+func Benchmark_Py_Sting_500(b *testing.B) {
+	args := NewArgs()
+	benchmarkPyString(b, hans500, args)
 }
 
 func BenchmarkHanPinyinOne(b *testing.B) {
@@ -75,7 +104,7 @@ func BenchmarkHanPinyinOne(b *testing.B) {
 	benchmarkHanPinyin(b, "中", args)
 }
 
-func BenchmarkHanPinyin500(b *testing.B) {
+func Benchmark_HanPinyin_500(b *testing.B) {
 	args := NewArgs()
 	benchmarkHanPinyin(b, hans500, args)
 }
@@ -85,7 +114,7 @@ func BenchmarkLazyPinyinOne(b *testing.B) {
 	benchmarkLazyPinyin(b, "中", args)
 }
 
-func BenchmarkLazyPinyin500(b *testing.B) {
+func Benchmark_LazyPinyin_500(b *testing.B) {
 	args := NewArgs()
 	benchmarkLazyPinyin(b, hans500, args)
 }
