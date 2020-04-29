@@ -19,8 +19,8 @@ go get -u github.com/go-ego/gpy
 
 ```
 go get -u github.com/go-ego/gpy/pinyin
-$ gpy 中国人
-zhōng guó rén
+$ gpy 中国话
+zhōng guó huà
 ```
 
 
@@ -42,40 +42,40 @@ import (
 )
 
 func main() {
-	hans := "中国人"
+	hans := "中国话"
 
 	// 默认
 	a := gpy.NewArgs()
 	fmt.Println(gpy.Pinyin(hans, a))
-	// [[zhong] [guo] [ren]]
+	// [[zhong] [guo] [hua]]
 
 	// 包含声调
 	a.Style = gpy.Tone
 	fmt.Println(gpy.Pinyin(hans, a))
-	// [[zhōng] [guó] [rén]]
+	// [[zhōng] [guó] [huà]]
 
 	// 声调用数字表示
 	a.Style = gpy.Tone2
 	fmt.Println(gpy.Pinyin(hans, a))
-	// [[zho1ng] [guo2] [re2n]]
+	// [[zho1ng] [guo2] [hua4]]
 
 	// 开启多音字模式
 	a = gpy.NewArgs()
 	a.Heteronym = true
 	fmt.Println(gpy.Pinyin(hans, a))
-	// [[zhong zhong] [guo] [ren]]
+	// [[zhong zhong] [guo] [hua]]
 	a.Style = gpy.Tone2
 	fmt.Println(gpy.Pinyin(hans, a))
-	// [[zho1ng zho4ng] [guo2] [re2n]]
+	// [[zho1ng zho4ng] [guo2] [hua4]]
 
 	fmt.Println(gpy.LazyPinyin(hans, gpy.NewArgs()))
-	// [zhong guo ren]
+	// [zhong guo hua]
 
 	fmt.Println(gpy.Convert(hans, nil))
-	// [[zhong] [guo] [ren]]
+	// [[zhong] [guo] [hua]]
 
 	fmt.Println(gpy.LazyConvert(hans, nil))
-	// [zhong guo ren]
+	// [zhong guo hua]
 }
 ```
 
