@@ -22,12 +22,12 @@ func TestParagraph(t *testing.T) {
 		"伦敦泰晤士河, 大笨钟":             "lun dun tai wu shi he, da ben zhong",
 		"东京都, 东京晴空塔":              "dong jing du, dong jing qing kong ta",
 		"洛杉矶好莱坞":                  "luo shan ji hao lai wu",
-		"上海外滩, 陆家嘴金融中心":           "shang hai wai tan, lu jia zui jin rong zhong xin",
-		"北京八达岭长城":                 "bei jing ba da ling chang cheng",
 		"巴黎埃菲尔铁塔":                 "ba li ai fei er tie ta",
+		"上海外滩, 陆家嘴上海中心":           "shang hai wai tan, lu jia zui shang hai zhong xin",
+		"北京八达岭长城":                 "bei jing ba da ling chang cheng",
 	}
 
-	seg := gse.New("zh, ../example/dict.txt")
+	seg := gse.New("zh, ../examples/dict.txt")
 	for source, expect := range expects {
 		actual := Paragraph(source, seg)
 		if expect != actual {

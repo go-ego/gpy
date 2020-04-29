@@ -22,9 +22,9 @@ func Test_pinyinPhrase(t *testing.T) {
 		"伦敦泰晤士河, 大笨钟":             "lun dun 泰晤士河, 大笨钟",
 		"东京都, 东京晴空塔":              "东 jing du , 东京 qing kong 塔",
 		"洛杉矶好莱坞":                  "洛杉矶 hao lai wu",
-		"上海外滩, 陆家嘴金融中心":           "shang hai 外滩, 陆家嘴金融中心",
-		"北京八达岭长城":                 "bei jing ba da ling chang cheng",
 		"巴黎埃菲尔铁塔":                 "巴黎 ai fei er tie ta",
+		"上海外滩, 陆家嘴上海中心":           "shang hai 外滩, 陆家嘴 shang hai 中心",
+		"北京八达岭长城":                 "bei jing ba da ling chang cheng",
 	}
 
 	for source, expect := range expects {
