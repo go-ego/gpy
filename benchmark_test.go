@@ -1,9 +1,18 @@
-package gpy
+package gpy_test
 
 import (
+	"fmt"
 	"strings"
 	"testing"
+
+	"github.com/go-ego/gpy"
+	"github.com/go-ego/gpy/phrase"
+	"github.com/go-ego/gse"
 )
+
+var hans50 = `红牛公司（Red Bull GmbH）是一家创办于奥地利的运动饮料公司。
+红牛公司的总部位于奥地利的滨湖富施尔。2013年，“红牛”运动饮料在全球的销量
+达到了53.87亿罐，比2012年增长3.1%。`
 
 var hans500 = strings.Replace(strings.Replace(`
 的、一、是、在、不、了、有、和、人、这、中、大、为、上、个、国、我、以、要、他、
@@ -33,88 +42,121 @@ var hans500 = strings.Replace(strings.Replace(`
 圆、包、火、住、调、满、县、局、照、参、红、细、引、听、该、铁、价、严、龙、飞
 `, "、", "", -1), "\n", "", -1)
 
-func benchmarkPinyin(b *testing.B, s string, args Args) {
+func benchmarkPinyin(b *testing.B, s string, args gpy.Args) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		Pinyin(s, args)
+		gpy.Pinyin(s, args)
 	}
 }
 
-func benchmarkPinyinString(b *testing.B, s string, args Args) {
+func benchmarkPinyinString(b *testing.B, s string, args gpy.Args) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		py := Pinyin(s, args)
-		ToString(py)
+		py := gpy.Pinyin(s, args)
+		gpy.ToString(py)
 	}
 }
 
-func benchmarkPyString(b *testing.B, s string, args Args) {
+func benchmarkPyString(b *testing.B, s string, args gpy.Args) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		Py(s, args)
+		gpy.Py(s, args)
 	}
 }
 
-func benchmarkHanPinyin(b *testing.B, s string, args Args) {
+func benchmarkHanPinyin(b *testing.B, s string, args gpy.Args) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		HanPinyin(s, args)
+		gpy.HanPinyin(s, args)
 	}
 }
 
-func benchmarkLazyPinyin(b *testing.B, s string, args Args) {
+func benchmarkLazyPinyin(b *testing.B, s string, args gpy.Args) {
 	b.StopTimer()
 	b.StartTimer()
 
 	for i := 0; i < b.N; i++ {
-		LazyPinyin(s, args)
+		gpy.LazyPinyin(s, args)
+	}
+}
+
+func benchmark_PhrasePinyin(b *testing.B, s string) {
+	b.StopTimer()
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		phrase.Paragraph(s)
+	}
+}
+
+var seg = gse.New()
+
+func benchmark_PhrasePinyin_Seg(b *testing.B, s string) {
+	b.StopTimer()
+	b.StartTimer()
+
+	for i := 0; i < b.N; i++ {
+		phrase.Paragraph(s, seg)
 	}
 }
 
 func BenchmarkPinyinOne(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkPinyin(b, "中", args)
 }
 
 func Benchmark_Pinyin_500(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkPinyin(b, hans500, args)
 }
 
 func Benchmark_Pinyin_Sting_500(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkPinyinString(b, hans500, args)
 }
 
 func Benchmark_Py_Sting_500(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkPyString(b, hans500, args)
 }
 
 func BenchmarkHanPinyinOne(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkHanPinyin(b, "中", args)
 }
 
 func Benchmark_HanPinyin_500(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkHanPinyin(b, hans500, args)
 }
 
+func init() {
+	fmt.Println(hans500)
+	phrase.LoadGseDict()
+}
+
+func Benchmark_PhrasePinyin_50(b *testing.B) {
+	benchmark_PhrasePinyin(b, hans50)
+}
+
+func Benchmark_PhrasePinyin_Seg_50(b *testing.B) {
+	benchmark_PhrasePinyin_Seg(b, hans50)
+}
+
 func BenchmarkLazyPinyinOne(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkLazyPinyin(b, "中", args)
 }
 
 func Benchmark_LazyPinyin_500(b *testing.B) {
-	args := NewArgs()
+	args := gpy.NewArgs()
 	benchmarkLazyPinyin(b, hans500, args)
 }
