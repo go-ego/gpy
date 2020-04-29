@@ -6,7 +6,7 @@ import (
 	"github.com/vcaesar/tt"
 )
 
-var hans = "中国人"
+var hans = "中国话"
 
 type (
 	pinyinFunc func(string, ...Args) [][]string
@@ -28,7 +28,7 @@ func TestPinyin(t *testing.T) {
 	var pyStr = [][]string{
 		{"zhong"},
 		{"guo"},
-		{"ren"},
+		{"hua"},
 	}
 
 	testData := []testCase{
@@ -53,7 +53,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"zhōng"},
 				{"guó"},
-				{"rén"},
+				{"huà"},
 			},
 		},
 		// Tone2
@@ -62,7 +62,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"zho1ng"},
 				{"guo2"},
-				{"re2n"},
+				{"hua4"},
 			},
 		},
 		// Tone3
@@ -71,7 +71,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"zhong1"},
 				{"guo2"},
-				{"ren2"},
+				{"hua4"},
 			},
 		},
 		// Initials
@@ -80,7 +80,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"zh"},
 				{"g"},
-				{"r"},
+				{"h"},
 			},
 		},
 		// FirstLetter
@@ -89,7 +89,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"z"},
 				{"g"},
-				{"r"},
+				{"h"},
 			},
 		},
 		// Finals
@@ -98,7 +98,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"ong"},
 				{"uo"},
-				{"en"},
+				{"ua"},
 			},
 		},
 		// FinalsTone
@@ -107,7 +107,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"ōng"},
 				{"uó"},
-				{"én"},
+				{"uà"},
 			},
 		},
 		// FinalsTone2
@@ -116,7 +116,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"o1ng"},
 				{"uo2"},
-				{"e2n"},
+				{"ua4"},
 			},
 		},
 		// FinalsTone3
@@ -125,7 +125,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"ong1"},
 				{"uo2"},
-				{"en2"},
+				{"ua4"},
 			},
 		},
 		// Heteronym
@@ -134,7 +134,7 @@ func TestPinyin(t *testing.T) {
 			[][]string{
 				{"zhong", "zhong"},
 				{"guo"},
-				{"ren"},
+				{"hua"},
 			},
 		},
 	}
@@ -176,32 +176,32 @@ func TestNone(t *testing.T) {
 
 func TestLazyPinyin(t *testing.T) {
 	v := LazyPinyin(hans, Args{})
-	value := []string{"zhong", "guo", "ren"}
+	value := []string{"zhong", "guo", "hua"}
 	tt.DEqual(t, value, v)
 
-	hans := "中国人abc"
+	hans := "中国话abc"
 	v = LazyPinyin(hans, Args{})
-	value = []string{"zhong", "guo", "ren"}
+	value = []string{"zhong", "guo", "hua"}
 	tt.DEqual(t, value, v)
 }
 
 func TestSlug(t *testing.T) {
 	v := Slug(hans, Args{})
-	value := "zhongguoren"
+	value := "zhongguohua"
 	tt.Equal(t, value, v)
 
 	v = Slug(hans, Args{Separator: ","})
-	value = "zhong,guo,ren"
+	value = "zhong,guo,hua"
 	tt.Equal(t, value, v)
 
 	a := NewArgs()
 	v = Slug(hans, a)
-	value = "zhong-guo-ren"
+	value = "zhong-guo-hua"
 	tt.Equal(t, value, v)
 
-	hans := "中国人abc，,中"
+	hans := "中国话abc，,中"
 	v = Slug(hans, a)
-	value = "zhong-guo-ren-zhong"
+	value = "zhong-guo-hua-zhong"
 	tt.Equal(t, value, v)
 }
 
@@ -212,7 +212,7 @@ func TestFinal(t *testing.T) {
 }
 
 func TestFallback(t *testing.T) {
-	hans := "中国人abc"
+	hans := "中国话abc"
 	testData := []testCase{
 		// default
 		{
@@ -220,7 +220,7 @@ func TestFallback(t *testing.T) {
 			[][]string{
 				{"zhong"},
 				{"guo"},
-				{"ren"},
+				{"hua"},
 			},
 		},
 		// custom
@@ -233,7 +233,7 @@ func TestFallback(t *testing.T) {
 			[][]string{
 				{"zhong"},
 				{"guo"},
-				{"ren"},
+				{"hua"},
 				{"la"},
 				{"la"},
 				{"la"},
@@ -250,7 +250,7 @@ func TestFallback(t *testing.T) {
 			[][]string{
 				{"zhong", "zhong"},
 				{"guo"},
-				{"ren"},
+				{"hua"},
 				{"la", "wo"},
 				{"la", "wo"},
 				{"la", "wo"},
@@ -347,7 +347,7 @@ func TestUpdated(t *testing.T) {
 
 func TestConvert(t *testing.T) {
 	v := Convert(hans, nil)
-	value := [][]string{{"zhong"}, {"guo"}, {"ren"}}
+	value := [][]string{{"zhong"}, {"guo"}, {"hua"}}
 	tt.DEqual(t, value, v)
 
 	a := NewArgs()
@@ -357,7 +357,7 @@ func TestConvert(t *testing.T) {
 
 func TestLazyConvert(t *testing.T) {
 	v := LazyConvert(hans, nil)
-	value := []string{"zhong", "guo", "ren"}
+	value := []string{"zhong", "guo", "hua"}
 	tt.DEqual(t, value, v)
 
 	a := NewArgs()
@@ -366,7 +366,7 @@ func TestLazyConvert(t *testing.T) {
 }
 
 func TestPy(t *testing.T) {
-	v1 := "zhong guo ren"
+	v1 := "zhong guo hua"
 	v := Py(hans)
 	tt.Equal(t, v1, v)
 }

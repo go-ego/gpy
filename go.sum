@@ -1,9 +1,9 @@
-github.com/go-ego/cedar v0.0.0-20191026170511-cf63283d1a1d/go.mod h1:2tj8NEwz6OsMT56YhN7mL7dYCncJs7dOmz/Xki1ofCU=
-github.com/go-ego/cedar v0.0.0-20191227150551-28f3bed5945b h1:ppRAHWgcd9NYe8ALlj4whOY7Dt/eMuS3KcpnDqPpBig=
-github.com/go-ego/cedar v0.0.0-20191227150551-28f3bed5945b/go.mod h1:fEBCL8k9n1uTGCgRVWR/ANO+13P6wx6l9Q1tCKLzqIw=
-github.com/go-ego/gse v0.0.0-20200106152254-75ab7b8d2f4a h1:Ur+gRA4xREqNrM+d2vbbQzGSEIQP3aqyEpx1AY2aiAw=
-github.com/go-ego/gse v0.0.0-20200106152254-75ab7b8d2f4a/go.mod h1:CEs4Qx+i8pnxDPG0Tlbb1GqVI4NxCbgNHcy+lQiDyTQ=
-github.com/vcaesar/tt v0.0.0-20191103173835-6896a351024b h1:psGhQitWSo4KBpLghvJPlhHxTJ8LQl1y0ekjSreqvu4=
-github.com/vcaesar/tt v0.0.0-20191103173835-6896a351024b/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
+github.com/go-ego/cedar v0.0.0-20200216133617-4c2101427ebf/go.mod h1:ATtMehzYSopsg1xy2sNQU7/GvvF+kEzJBPAz9/oOV7Y=
+github.com/go-ego/cedar v0.0.0-20200429152154-d9898d59dfc2 h1:G3S6kZR/WXOhVzGR6/4kPii+byx6qpJi5CHL7Sfh3Pw=
+github.com/go-ego/cedar v0.0.0-20200429152154-d9898d59dfc2/go.mod h1:ATtMehzYSopsg1xy2sNQU7/GvvF+kEzJBPAz9/oOV7Y=
+github.com/go-ego/gse v0.0.0-20200428152923-1fd1428e78fe h1:j67OYlF31UzN5N54mk/Oqho3XfQHf1FyNeNptG3xl7Y=
+github.com/go-ego/gse v0.0.0-20200428152923-1fd1428e78fe/go.mod h1:uRpJAgVoqQJiDLHQ5ao/8+ugODnsVoOCXcVRmTvNwes=
 github.com/vcaesar/tt v0.0.0-20200214111121-9561a943a243 h1:cx8++jxUQNguYJchu9WYJ6ELAawSTbLRDfBRYaoX5fk=
 github.com/vcaesar/tt v0.0.0-20200214111121-9561a943a243/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
+github.com/vcaesar/tt v0.0.0-20200413173740-6220b2b5f8ff h1:etf/E3LV04o/l5+/qEQWM5TcWJNVKw61+onsAeNZBPM=
+github.com/vcaesar/tt v0.0.0-20200413173740-6220b2b5f8ff/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
