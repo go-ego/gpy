@@ -96,6 +96,10 @@ func SinglePinyin(r rune, a Args) []string {
 	}
 
 	value, ok := PinyinDict[int(r)]
+	if value == "" {
+		value, ok = PinyinDictAdd[int(r)]
+	}
+
 	pys := []string{}
 	if ok {
 		pys = strings.Split(value, ",")

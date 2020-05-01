@@ -3,7 +3,9 @@ package phrase
 /*
 	go pinyin addition version
 */
-var phraseDictAddition = map[string]string{
+
+// DictAdd phrase dict addition
+var DictAdd = map[string]string{
 	"宿舍": "sù shè",
 	"不薄": "bù báo",
 	"打折": "dǎ zhé",
