@@ -22,6 +22,13 @@ func main() {
 	s := gpy.ToString(py)
 	fmt.Println("gpy string:", s)
 
+	phrase.LoadGseDict()
+	go func() {
+		fmt.Println("gpy phrase1:", phrase.Paragraph(test))
+	}()
+	fmt.Println("gpy phrase2:", phrase.Paragraph(test))
+
 	seg := gse.New("zh, dict.txt")
+	phrase.DictAdd["都会区"] = "dū huì qū"
 	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
 }
