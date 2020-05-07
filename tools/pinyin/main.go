@@ -14,9 +14,7 @@ import (
 var (
 	heteronym = flag.Bool("e", false, "启用多音字模式")
 
-	str = `指定拼音风格。可选值：Normal, Tone, Tone2, Tone3, Initials, 
-	FirstLetter, Finals, FinalsTone, FinalsTone2, FinalsTone3`
-
+	str   = `指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4`
 	style = flag.String("s", "zh4ao", str)
 )
 
