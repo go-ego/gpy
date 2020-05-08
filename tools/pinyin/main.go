@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/go-ego/gpy"
+	"github.com/go-ego/gpy/phrase"
 	"github.com/mattn/go-isatty"
 )
 
@@ -16,6 +17,7 @@ var (
 
 	str   = `指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4`
 	style = flag.String("s", "zh4ao", str)
+	phr   = flag.Bool("p", false, "Use phrase")
 )
 
 func selectArgs(args gpy.Args) {
@@ -64,7 +66,16 @@ func main() {
 	args := gpy.NewArgs()
 	selectArgs(args)
 
-	pys := gpy.Pinyin(strings.Join(hans, ""), args)
+	ps := strings.Join(hans, "")
+	if *phr {
+		phrase.Option = args
+
+		pys := phrase.Paragraph(ps)
+		fmt.Println(pys)
+		return
+	}
+
+	pys := gpy.Pinyin(ps, args)
 	for _, s := range pys {
 		fmt.Print(strings.Join(s, ","), " ")
 	}
