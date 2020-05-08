@@ -44,7 +44,7 @@ func pinyinPhrase(s string, segs ...gse.Segmenter) string {
 			match = DictAdd[word]
 		}
 
-		match = gpy.ToFixed(match, paragraphOption)
+		match = gpy.ToFixed(match, Option)
 		if match != "" {
 			s = strings.Replace(s, word, " "+match+" ", 1)
 		}

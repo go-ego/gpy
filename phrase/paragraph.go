@@ -13,7 +13,8 @@ var (
 	splacesRegexp    = regexp.MustCompile(`[\s]+`)
 	allowCharsRegexp = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
 
-	paragraphOption = gpy.Args{
+	// Option set pinyin style args option
+	Option = gpy.Args{
 		Style:     gpy.Normal,
 		Heteronym: true,
 	}
@@ -40,7 +41,7 @@ func Paragraph(p string, segs ...gse.Segmenter) (s string) {
 	for _, r := range p {
 		if unicode.Is(unicode.Han, r) {
 			// Han chars
-			result := gpy.HanPinyin(string(r), paragraphOption)
+			result := gpy.HanPinyin(string(r), Option)
 			if len(result) == 0 {
 				continue
 			}
