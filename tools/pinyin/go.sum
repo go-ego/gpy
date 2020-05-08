@@ -1,12 +1,9 @@
 github.com/go-ego/cedar v0.0.0-20200216133617-4c2101427ebf/go.mod h1:ATtMehzYSopsg1xy2sNQU7/GvvF+kEzJBPAz9/oOV7Y=
-github.com/go-ego/cedar v0.0.0-20200429152154-d9898d59dfc2 h1:G3S6kZR/WXOhVzGR6/4kPii+byx6qpJi5CHL7Sfh3Pw=
-github.com/go-ego/cedar v0.0.0-20200429152154-d9898d59dfc2/go.mod h1:ATtMehzYSopsg1xy2sNQU7/GvvF+kEzJBPAz9/oOV7Y=
 github.com/go-ego/cedar v0.0.0-20200505150524-aa5e897d82c6 h1:UR/pMBgzZlY8pFBrKFNSpZqVYf9U7ztgyVVkZwp7LIA=
 github.com/go-ego/cedar v0.0.0-20200505150524-aa5e897d82c6/go.mod h1:ZMJ6xXXul9XHx90GiYWEJp5G6nY8WG+YDr7ei9bzWdc=
-github.com/go-ego/gpy v0.0.0-20200502162836-c4264855dea1 h1:PX9jh74x8Fm/cOufvxKUQ/lGJMdWcPyFKR0JCBcrFoE=
-github.com/go-ego/gpy v0.0.0-20200502162836-c4264855dea1/go.mod h1:TIgp/u532oX+jy7GHSkyWCgRVsSkp5z9Yg3lrDCxFVw=
-github.com/go-ego/gse v0.0.0-20200428152923-1fd1428e78fe h1:j67OYlF31UzN5N54mk/Oqho3XfQHf1FyNeNptG3xl7Y=
-github.com/go-ego/gse v0.0.0-20200428152923-1fd1428e78fe/go.mod h1:uRpJAgVoqQJiDLHQ5ao/8+ugODnsVoOCXcVRmTvNwes=
+github.com/go-ego/gpy v0.0.0-20200508152904-0decc5204961 h1:4RAulYCZu53LxnXmgft7WFxtzBQ8cewCfPj50lF/+UI=
+github.com/go-ego/gpy v0.0.0-20200508152904-0decc5204961/go.mod h1:/69HlBe4MmOaeig4X/3yaxnFdrve+I3bnQ0LcrjD0xA=
+github.com/go-ego/gse v0.0.0-20200501160728-b6f855f84792/go.mod h1:uRpJAgVoqQJiDLHQ5ao/8+ugODnsVoOCXcVRmTvNwes=
 github.com/go-ego/gse v0.0.0-20200505150816-a64500575696 h1:JItu5LxBwjoCTMX7PT21axE54uWnt5hNwl0TG5tM7pU=
 github.com/go-ego/gse v0.0.0-20200505150816-a64500575696/go.mod h1:WfY9+XQZ3ss5wkTkNzh49EFOlUkLYcPfsuXNbmVpDP8=
 github.com/mattn/go-isatty v0.0.12 h1:wuysRhFDzyxgEmMf5xjvJ2M9dZoWAXNNr5LSBS7uHXY=
