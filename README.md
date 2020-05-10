@@ -20,7 +20,7 @@ go get -u github.com/go-ego/gpy
 ### install CLI tool:
 
 ```
-go get -u github.com/go-ego/gpy/pinyin
+go get -u github.com/go-ego/gpy/tools/pinyin
 $ gpy 中国话
 zhōng guó rén
 ```
