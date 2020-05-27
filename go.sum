@@ -1,6 +1,6 @@
 github.com/go-ego/cedar v0.10.0 h1:422oGVkurGN2JZ0kiOev4hF6gsQULbePfjQIB4JHl8M=
 github.com/go-ego/cedar v0.10.0/go.mod h1:DPGtR4K0NDHs/TlwrY063w9Mx1o8+OBegu+nINLhP84=
-github.com/go-ego/gse v0.50.2 h1:jG+Tmive4srBnvmraSTwOjK4LNfws9xIiipXaK2A9j8=
-github.com/go-ego/gse v0.50.2/go.mod h1:YA6Poe9bIZUJYtSmzHPZ7tqj2Z7Hk8lo8kKETnCxMXQ=
+github.com/go-ego/gse v0.50.3 h1:bzQiq6DyKgXaTiym3hOkBmr2FOtZdMHiHRUoT1aMsvA=
+github.com/go-ego/gse v0.50.3/go.mod h1:YA6Poe9bIZUJYtSmzHPZ7tqj2Z7Hk8lo8kKETnCxMXQ=
 github.com/vcaesar/tt v0.10.0 h1:jPtFiRRnCOXVakd5ujCed2dwWwTs91wh8W1iHeUIfc0=
 github.com/vcaesar/tt v0.10.0/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
