@@ -33,6 +33,11 @@ var (
 	}
 )
 
+// Pinyin return paragraph []string
+func Pinyin(p string, segs ...gse.Segmenter) []string {
+	return strings.Split(Paragraph(p, segs...), " ")
+}
+
 // Paragraph convert a Chinese string paragraph to pinyin,
 // including letters, numbers, symbols
 func Paragraph(p string, segs ...gse.Segmenter) (s string) {
