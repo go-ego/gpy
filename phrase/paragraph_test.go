@@ -37,3 +37,10 @@ func TestParagraph(t *testing.T) {
 	}
 
 }
+
+func TestPinyin(t *testing.T) {
+	seg := gse.New()
+	WithGse(seg)
+	p := Pinyin("西雅图太空针")
+	tt.Equal(t, "[xi ya tu tai kong zhen]", p)
+}

@@ -18,6 +18,12 @@ func LoadGseDict(files ...string) error {
 	return seg.LoadDict(files...)
 }
 
+// WithGse register gse segmenter
+func WithGse(segs gse.Segmenter) {
+	seg = segs
+	loaded = true
+}
+
 // CutWord cut the string word
 func CutWord(s string) []string {
 	return seg.CutAll(s)
