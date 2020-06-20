@@ -13,3 +13,8 @@ var DictAdd = map[string]string{
 	"着眼": "zhuó yǎn",
 	"着重": "zhuó zhòng",
 }
+
+// AddDict adds a token into phrase dictionary.
+func AddDict(text, py string) {
+	DictAdd[text] = py
+}
