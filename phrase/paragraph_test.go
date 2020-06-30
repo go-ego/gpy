@@ -39,8 +39,10 @@ func TestParagraph(t *testing.T) {
 }
 
 func TestPinyin(t *testing.T) {
-	seg := gse.New()
+	seg := gse.New("zh, ../examples/dict.txt")
 	WithGse(seg)
-	p := Pinyin("西雅图太空针")
-	tt.Equal(t, "[xi ya tu tai kong zhen]", p)
+
+	AddDict("都会区", "dū huì qū")
+	p := Pinyin("西雅图都会区, 西雅图太空针")
+	tt.Equal(t, "[xi ya tu du hui qu, xi ya tu tai kong zhen]", p)
 }
