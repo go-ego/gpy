@@ -45,4 +45,7 @@ func TestPinyin(t *testing.T) {
 	AddDict("都会区", "dū huì qū")
 	p := Pinyin("西雅图都会区, 西雅图太空针")
 	tt.Equal(t, "[xi ya tu du hui qu, xi ya tu tai kong zhen]", p)
+
+	i := Initial("都会区")
+	tt.Equal(t, "dhq", i)
 }
