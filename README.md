@@ -69,6 +69,7 @@ func main() {
 	pharse.AddDict("都会区", "dū huì qū")
 
 	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
+	fmt.Println("pinyin: ", phrase.Pinyin(test))
 	fmt.Println("Initial: ", phrase.Initial("都会区"))
 }
 ```
