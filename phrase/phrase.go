@@ -42,15 +42,22 @@ func cutWords(s string, segs ...gse.Segmenter) []string {
 	return seg.CutAll(s)
 }
 
+// Match match word pinyin
+func Match(word string) string {
+	match := phraseDict[word]
+	if match == "" {
+		match = DictAdd[word]
+	}
+
+	match = gpy.ToFixed(match, Option)
+	return match
+}
+
 func pinyinPhrase(s string, segs ...gse.Segmenter) string {
 	words := cutWords(s, segs...)
 	for _, word := range words {
-		match := phraseDict[word]
-		if match == "" {
-			match = DictAdd[word]
-		}
+		match := Match(word)
 
-		match = gpy.ToFixed(match, Option)
 		if match != "" {
 			s = strings.Replace(s, word, " "+match+" ", 1)
 		}
