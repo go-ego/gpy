@@ -10,6 +10,9 @@ import (
 var (
 	seg    gse.Segmenter
 	loaded bool
+
+	// Cut set pinyinPhrase cut
+	Cut = true
 )
 
 // LoadGseDict load the user's gse dict
@@ -42,19 +45,36 @@ func cutWords(s string, segs ...gse.Segmenter) []string {
 	return seg.CutAll(s)
 }
 
-func pinyinPhrase(s string, segs ...gse.Segmenter) string {
-	words := cutWords(s, segs...)
-	for _, word := range words {
-		match := phraseDict[word]
-		if match == "" {
-			match = DictAdd[word]
-		}
-
-		match = gpy.ToFixed(match, Option)
-		if match != "" {
-			s = strings.Replace(s, word, " "+match+" ", 1)
-		}
+// Match match word pinyin
+func Match(word string) string {
+	match := phraseDict[word]
+	if match == "" {
+		match = DictAdd[word]
 	}
 
+	match = gpy.ToFixed(match, Option)
+	return match
+}
+
+func matchs(s, word string) string {
+	match := Match(word)
+	if match != "" {
+		s = strings.Replace(s, word, " "+match+" ", 1)
+	}
+
+	return s
+}
+
+func pinyinPhrase(s string, segs ...gse.Segmenter) string {
+	if Cut {
+		words := cutWords(s, segs...)
+		for _, word := range words {
+			s = matchs(s, word)
+		}
+
+		return s
+	}
+
+	s = matchs(s, s)
 	return s
 }
