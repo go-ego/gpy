@@ -41,8 +41,15 @@ func Pinyin(p string, segs ...gse.Segmenter) []string {
 // Initial return pinyin initial
 func Initial(p string, segs ...gse.Segmenter) (s string) {
 	a := Pinyin(p, segs...)
+	return Join(a)
+}
+
+// Join []string to string
+func Join(a []string) (s string) {
 	for _, v := range a {
-		s += string([]rune(v)[0])
+		if len(v) > 0 {
+			s += string([]rune(v)[0])
+		}
 	}
 
 	return

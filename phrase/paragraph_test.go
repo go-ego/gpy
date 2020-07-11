@@ -42,10 +42,22 @@ func TestPinyin(t *testing.T) {
 	seg := gse.New("zh, ../examples/dict.txt")
 	WithGse(seg)
 
+	text := "西雅图都会区, 西雅图太空针"
+
 	AddDict("都会区", "dū huì qū")
-	p := Pinyin("西雅图都会区, 西雅图太空针")
+	p := Pinyin(text)
 	tt.Equal(t, "[xi ya tu du hui qu, xi ya tu tai kong zhen]", p)
 
 	i := Initial("都会区")
 	tt.Equal(t, "dhq", i)
+
+	Cut = false
+	s := seg.Trim(seg.CutAll(text))
+	i += ", "
+	for _, v := range s {
+		i1 := Initial(v)
+		i += i1 + " "
+	}
+	tt.Equal(t, "dhq, xyt dhq xyt tk z ", i)
+	Cut = true
 }
