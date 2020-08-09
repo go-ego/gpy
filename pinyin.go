@@ -63,7 +63,7 @@ var (
 	reTone3 = regexp.MustCompile("^([a-z]+)([1-4])([a-z]*)$")
 
 	reFinalExceptions  = regexp.MustCompile("^(j|q|x)(ū|ú|ǔ|ù)$")
-	reFinal2Exceptions = regexp.MustCompile("^(j|q|x)u(\\d?)$")
+	reFinal2Exceptions = regexp.MustCompile(`^(j|q|x)u(\d?)$`)
 )
 
 // Args 配置信息
@@ -105,7 +105,7 @@ func final(p string) string {
 	matches := reFinalExceptions.FindStringSubmatch(p)
 	// jū -> jǖ
 	if len(matches) == 3 && matches[1] != "" && matches[2] != "" {
-		v, _ := finalExceptionsMap[matches[2]]
+		v := finalExceptionsMap[matches[2]]
 		return v
 	}
 	// ju -> jv, ju1 -> jv1
@@ -139,7 +139,7 @@ func ToFixed(p string, a Args) string {
 
 	// 替换拼音中的带声调字符
 	py := rePhoneticSymbol.ReplaceAllStringFunc(p, func(m string) string {
-		symbol, _ := phoneticSymbol[m]
+		symbol := phoneticSymbol[m]
 		switch a.Style {
 		// 不包含声调
 		case Normal, FirstLetter, Finals:

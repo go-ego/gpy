@@ -48,7 +48,7 @@ var PinyinDict = map[int]string{
 	output += strings.Join(lines, "\n")
 	output += "\n}\n"
 	outFile.WriteString(output)
-	return
+	// return
 }
 
 func parseCmdArgs() cmdArgs {
