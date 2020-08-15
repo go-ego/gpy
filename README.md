@@ -66,7 +66,7 @@ func main() {
 
 	seg := gse.New("zh, dict.txt")
 	// phrase.DictAdd["都会区"] = "dū huì qū"
-	pharse.AddDict("都会区", "dū huì qū")
+	phrase.AddDict("都会区", "dū huì qū")
 
 	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
 	fmt.Println("pinyin: ", phrase.Pinyin(test))
