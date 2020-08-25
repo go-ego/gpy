@@ -10,7 +10,7 @@ import (
 // Meta
 const (
 	// Version get the gpy version
-	Version = "v0.30.0.105"
+	Version = "v0.40.0.133"
 	// License   = "MIT"
 )
 
