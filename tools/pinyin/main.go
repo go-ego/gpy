@@ -61,7 +61,7 @@ func main() {
 	}
 
 	if len(hans) == 0 {
-		fmt.Fprintln(os.Stderr, "请至少输入一个汉字: pinyin [-e] [-s STYLE] HANS [HANS ...]")
+		fmt.Fprintln(os.Stderr, "请至少输入一个汉字: pinyin [-e] [-p] [-s STYLE] HANS [HANS ...]")
 		os.Exit(1)
 	}
 

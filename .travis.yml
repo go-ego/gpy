@@ -8,16 +8,17 @@ go:
   # - 1.11.x
   # - 1.12.x
   # - 1.13.x
-  - 1.14.x
+  # - 1.14.x
+  - 1.15.x
   # - tip
 
 sudo: false
 
 # before_install:
-  # - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
-  # - go get -u github.com/mattn/go-isatty
-  # - go get -u github.com/axw/gocov/gocov
-  # - go get -u github.com/mattn/goveralls
+# - if ! go get code.google.com/p/go.tools/cmd/cover; then go get golang.org/x/tools/cmd/cover; fi
+# - go get -u github.com/mattn/go-isatty
+# - go get -u github.com/axw/gocov/gocov
+# - go get -u github.com/mattn/goveralls
 
 script:
   - go run tools/pinyin/main.go abc
