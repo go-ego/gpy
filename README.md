@@ -21,8 +21,8 @@ go get -u github.com/go-ego/gpy
 
 ```
 go get -u github.com/go-ego/gpy/tools/pinyin
-$ gpy 中国话
-zhōng guó rén
+$ pinyin 中国话
+zhong guo hua
 ```
 
 
