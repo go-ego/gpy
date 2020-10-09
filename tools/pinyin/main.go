@@ -20,7 +20,7 @@ var (
 	phr   = flag.Bool("p", false, "Use phrase")
 )
 
-func selectArgs(args gpy.Args) {
+func selectArgs(args gpy.Args) gpy.Args {
 	if *heteronym {
 		args.Heteronym = true
 	}
@@ -44,6 +44,8 @@ func selectArgs(args gpy.Args) {
 	} else {
 		args.Style = value
 	}
+
+	return args
 }
 
 func main() {
@@ -64,7 +66,7 @@ func main() {
 	}
 
 	args := gpy.NewArgs()
-	selectArgs(args)
+	args = selectArgs(args)
 
 	ps := strings.Join(hans, "")
 	if *phr {
