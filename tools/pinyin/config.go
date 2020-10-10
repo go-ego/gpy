@@ -86,7 +86,7 @@ const USAGE_SUMMARY = "  -s\tStyle. 指定拼音风格。可选值：zhao, zh4ao
 // Usage function shows help on commandline usage
 func Usage() {
 	fmt.Fprintf(os.Stderr,
-		"\nUsage:\n %s [flags..]\n\nFlags:\n\n",
+		"\nUsage:\n %s [flags..] HANS [HANS ...]\n\nFlags:\n\n",
 		progname)
 	fmt.Fprintf(os.Stderr, USAGE_SUMMARY)
 	flag.PrintDefaults()

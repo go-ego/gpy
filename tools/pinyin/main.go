@@ -42,6 +42,9 @@ func selectArgs(args gpy.Args) gpy.Args {
 
 func main() {
 	flag.Parse()
+	if Opts.Help {
+		Usage()
+	}
 	hans := flag.Args()
 
 	stdin := []byte{}
@@ -71,7 +74,11 @@ func main() {
 
 	pys := gpy.Pinyin(ps, args)
 	for _, s := range pys {
-		fmt.Print(strings.Join(s, ","), " ")
+		j := strings.Join(s, ",")
+		if Opts.Capitalize {
+			j = strings.Title(j)
+		}
+		fmt.Print(j, Opts.Delimiter)
 	}
 	if len(pys) > 0 {
 		fmt.Println()
