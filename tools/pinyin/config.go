@@ -81,14 +81,14 @@ func init() {
 
 }
 
-const UsageSummary = "  -s\tStyle. 指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4 (PINYIN_S)\n  -d\tDelimiter. 间隔符号 (PINYIN_D)\n  -c\tCapitalize. 启用首字符大写模式 (PINYIN_C)\n  -e\tHeteronym. 启用多音字模式 (PINYIN_E)\n  -p\tPhrase. 启用短语 (PINYIN_P)\n  -v\tVerbose. 启用详细输出模式 (PINYIN_V)\n  -help\tHelp. 显示帮助 (PINYIN_HELP)\n\nDetails:\n\n"
+const usageSummary = "  -s\tStyle. 指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4 (PINYIN_S)\n  -d\tDelimiter. 间隔符号 (PINYIN_D)\n  -c\tCapitalize. 启用首字符大写模式 (PINYIN_C)\n  -e\tHeteronym. 启用多音字模式 (PINYIN_E)\n  -p\tPhrase. 启用短语 (PINYIN_P)\n  -v\tVerbose. 启用详细输出模式 (PINYIN_V)\n  -help\tHelp. 显示帮助 (PINYIN_HELP)\n\nDetails:\n\n"
 
 // Usage function shows help on commandline usage
 func Usage() {
 	fmt.Fprintf(os.Stderr,
 		"\nUsage:\n %s [flags..] HANS [HANS ...]\n\nFlags:\n\n",
 		progname)
-	fmt.Fprintf(os.Stderr, UsageSummary)
+	fmt.Fprintf(os.Stderr, usageSummary)
 	flag.PrintDefaults()
 	fmt.Fprintf(os.Stderr,
 		"\n-s 或 -d 也可以由 PINYIN_S 或 PINYIN_D 环境变量指定\n")
