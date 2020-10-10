@@ -12,16 +12,8 @@ import (
 	"github.com/mattn/go-isatty"
 )
 
-var (
-	heteronym = flag.Bool("e", false, "启用多音字模式")
-
-	str   = `指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4`
-	style = flag.String("s", "zh4ao", str)
-	phr   = flag.Bool("p", false, "Use phrase")
-)
-
 func selectArgs(args gpy.Args) gpy.Args {
-	if *heteronym {
+	if Opts.Heteronym {
 		args.Heteronym = true
 	}
 
@@ -38,8 +30,8 @@ func selectArgs(args gpy.Args) gpy.Args {
 		"ao4":   gpy.FinalsTone3,
 	}
 
-	if value, ok := styleValues[*style]; !ok {
-		fmt.Fprintf(os.Stderr, "无效的拼音风格：%s\n", *style)
+	if value, ok := styleValues[Opts.Style]; !ok {
+		fmt.Fprintf(os.Stderr, "无效的拼音风格：%s\n", Opts.Style)
 		os.Exit(1)
 	} else {
 		args.Style = value
@@ -69,7 +61,7 @@ func main() {
 	args = selectArgs(args)
 
 	ps := strings.Join(hans, "")
-	if *phr {
+	if Opts.Phrase {
 		phrase.Option = args
 
 		pys := phrase.Paragraph(ps)
