@@ -1,0 +1,66 @@
+##==========================================================================
+# Command line flag handling code auto generation driven file
+# See https://github.com/go-easygen/wireframe/wiki/Command-line-flag-handling-code-auto-generation#opensesame
+# for details steps of how to use it to create the cli program
+##==========================================================================
+
+# program name, name for the executable
+ProgramName: pinyin
+
+PackageName: main
+
+# Name of the structure to hold the values for/from commandline
+StructName: Options
+# The actual variable that hold the commandline paramter values
+StructVar: Opts
+
+# Whether to use the USAGE_SUMMARY in Usage help
+UsageSummary: "TRUE"
+
+UsageLead: "\\nUsage:\\n %s [flags..] HANS [HANS ...]\\n\\nFlags:\\n\\n"
+
+UsageEnd: "\\n-s 或 -d 也可以由 PINYIN_S 或 PINYIN_D 环境变量指定\\n"
+
+Options:
+
+  - Name: Style
+    Type: string
+    Flag: s
+    Usage: Style. 指定拼音风格。可选值：zhao, zh4ao, zha4o, zhao4, zh, z, ao, 4ao, a4o, ao4
+    Value: '"zh4ao"'
+
+  - Name: Delimiter
+    Type: string
+    Flag: d
+    Usage: Delimiter. 间隔符号
+    Value: '" "'
+
+  - Name: Capitalize
+    Type: bool
+    Flag: c
+    Usage: Capitalize. 启用首字符大写模式
+    Value: false
+
+  - Name: Heteronym
+    Type: bool
+    Flag: e
+    Usage: Heteronym. 启用多音字模式
+    Value: false
+
+  - Name: Phrase
+    Type: bool
+    Flag: p
+    Usage: Phrase. 启用短语
+    Value: false
+
+  - Name: Verbose
+    Type: bool
+    Flag: v
+    Usage: Verbose. 启用详细输出模式
+    Value: false
+
+  - Name: Help
+    Type: bool
+    Flag: help
+    Usage: Help. 显示帮助
+    Value: false
