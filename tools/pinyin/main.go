@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-ego/gpy"
 	"github.com/go-ego/gpy/phrase"
+	"github.com/go-ego/gse"
 	"github.com/mattn/go-isatty"
 )
 
@@ -66,6 +67,10 @@ func main() {
 	ps := strings.Join(hans, "")
 	if Opts.Phrase {
 		phrase.Option = args
+
+		var seg gse.Segmenter
+		seg.SkipLog = true
+		// phrase.WithGse(seg)
 
 		pys := phrase.Paragraph(ps)
 		fmt.Println(pys)
