@@ -69,10 +69,12 @@ func main() {
 		phrase.Option = args
 
 		var seg gse.Segmenter
-		seg.SkipLog = true
-		// phrase.WithGse(seg)
+		if !Opts.Verbose {
+			seg.SkipLog = true
+		}
 
-		pys := phrase.Paragraph(ps)
+		seg.LoadDict()
+		pys := phrase.Paragraph(ps, seg)
 		fmt.Println(pys)
 		return
 	}
