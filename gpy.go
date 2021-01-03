@@ -44,7 +44,8 @@ func Pinyin(s string, arg ...Args) [][]string {
 	a := args(arg...)
 
 	pys := [][]string{}
-	sw := gse.SplitTextToWords([]byte(s))
+	var seg gse.Segmenter
+	sw := seg.SplitTextToWords([]byte(s))
 	for i := 0; i < len(sw); i++ {
 		s1 := string([]byte(sw[i]))
 		r := []rune(s1)
