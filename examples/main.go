@@ -28,7 +28,7 @@ func main() {
 	}()
 	fmt.Println("gpy phrase2:", phrase.Paragraph(test))
 
-	seg := gse.New("zh, dict.txt")
+	seg, _ := gse.New("zh, dict.txt")
 	phrase.DictAdd["都会区"] = "dū huì qū"
 	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
 }

@@ -39,7 +39,7 @@ func cutWords(s string, segs ...gse.Segmenter) []string {
 	}
 
 	if !loaded {
-		seg = gse.New()
+		seg, _ = gse.New()
 		loaded = true
 	}
 	return seg.CutAll(s)

@@ -97,7 +97,7 @@ func benchmark_PhrasePinyin(b *testing.B, s string) {
 	}
 }
 
-var seg = gse.New()
+var seg, _ = gse.New()
 
 func benchmark_PhrasePinyin_Seg(b *testing.B, s string) {
 	b.StopTimer()
