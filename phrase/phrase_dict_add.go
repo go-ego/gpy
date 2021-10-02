@@ -1,10 +1,10 @@
 package phrase
 
 /*
-	go pinyin addition version
+	go pinyin addition dictionary
 */
 
-// DictAdd phrase dict addition
+// DictAdd phrase dict addition map
 var DictAdd = map[string]string{
 	"宿舍": "sù shè",
 	"不薄": "bù báo",
@@ -17,4 +17,9 @@ var DictAdd = map[string]string{
 // AddDict adds a token into phrase dictionary.
 func AddDict(text, py string) {
 	DictAdd[text] = py
+}
+
+// Remove remove a token from phrase dictionary.
+func Remove(text string) {
+	delete(DictAdd, text)
 }

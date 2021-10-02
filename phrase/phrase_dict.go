@@ -1,12 +1,13 @@
 package phrase
 
-// phraseDict is data map
+// phraseDict is phrase data map
 //
 // Generate from:
 // https://github.com/hotoo/pinyin/blob/master/data/phrases-dict.js
 //
 // Warning: Auto-generated file, don't edit.
-// If you want add more words, use phrase_dict_addition.go
+//
+// If you want add more words, use phrase_dict_add.go
 var phraseDict = map[string]string{
 	"阿Ｑ":         "ā Ｑ",
 	"阿爸":         "ā bà",
