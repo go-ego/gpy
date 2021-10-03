@@ -1,3 +1,9 @@
+// Copyright (c) 2017 go-ego
+//
+// All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package phrase
 
 import (
@@ -74,7 +80,7 @@ func Paragraph(p string, segs ...gse.Segmenter) (s string) {
 
 			s += " " + string(result[0][0]) + " "
 		} else {
-			// Other chars
+			// Not han chars
 			char := string(r)
 
 			if allowCharsRegexp.MatchString(char) {

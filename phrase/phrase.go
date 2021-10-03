@@ -1,3 +1,9 @@
+// Copyright (c) 2017 go-ego
+//
+// All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package phrase
 
 import (
@@ -11,7 +17,7 @@ var (
 	seg    gse.Segmenter
 	loaded bool
 
-	// Cut set pinyinPhrase cut
+	// Cut set the pinyin phrase cut
 	Cut = true
 )
 
@@ -21,7 +27,7 @@ func LoadGseDict(files ...string) error {
 	return seg.LoadDict(files...)
 }
 
-// WithGse register gse segmenter
+// WithGse register the gse segmenter
 func WithGse(segs gse.Segmenter) {
 	seg = segs
 	loaded = true

@@ -1,3 +1,10 @@
+// Copyright (c) 2016 mozillazg
+// Copyright (c) 2017 go-ego
+//
+// All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package gpy
 
 import (
@@ -11,7 +18,8 @@ import (
 const (
 	// Version get the gpy version
 	Version = "v0.40.0.133"
-	// License   = "MIT"
+	// License get the license
+	License = "MIT"
 )
 
 // GetVersion get the version

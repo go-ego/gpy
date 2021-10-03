@@ -1,3 +1,10 @@
+// Copyright (c) 2016 mozillazg
+// Copyright (c) 2017 go-ego
+//
+// All rights reserved.
+// Use of this source code is governed by a MIT style
+// license that can be found in the LICENSE file.
+
 package gpy
 
 import (
@@ -118,13 +125,17 @@ func handleYW(p string) string {
 	// 特例 y/w
 	if strings.HasPrefix(p, "yu") {
 		p = "v" + p[2:] // yu -> v
-	} else if strings.HasPrefix(p, "yi") {
+	}
+	if strings.HasPrefix(p, "yi") {
 		p = p[1:] // yi -> i
-	} else if strings.HasPrefix(p, "y") {
+	}
+	if strings.HasPrefix(p, "y") {
 		p = "i" + p[1:] // y -> i
-	} else if strings.HasPrefix(p, "wu") {
+	}
+	if strings.HasPrefix(p, "wu") {
 		p = p[1:] // wu -> u
-	} else if strings.HasPrefix(p, "w") {
+	}
+	if strings.HasPrefix(p, "w") {
 		p = "u" + p[1:] // w -> u
 	}
 	return p
