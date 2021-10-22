@@ -51,7 +51,7 @@ func cutWords(s string, segs ...gse.Segmenter) []string {
 	return seg.CutAll(s)
 }
 
-// Match match word pinyin
+// Match match the word pinyin
 func Match(word string) string {
 	match := phraseDict[word]
 	if match == "" {
@@ -81,6 +81,5 @@ func pinyinPhrase(s string, segs ...gse.Segmenter) string {
 		return s
 	}
 
-	s = matchs(s, s)
-	return s
+	return matchs(s, s)
 }

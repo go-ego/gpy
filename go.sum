@@ -1,5 +1,5 @@
-github.com/go-ego/gse v0.69.8 h1:enzXx0Z/U5UhmUAZSD/bh1rP83hMfrhF/ZEBe784nDU=
-github.com/go-ego/gse v0.69.8/go.mod h1:TXy19dAfok1+NOqfTUFVqifNAcAz7srXfG+jLC8RZ0s=
+github.com/go-ego/gse v0.69.10 h1:vI4DY3LCy+1trfIVfExEheal156+Aj8IlFHccDpDz3c=
+github.com/go-ego/gse v0.69.10/go.mod h1:TXy19dAfok1+NOqfTUFVqifNAcAz7srXfG+jLC8RZ0s=
 github.com/mattn/go-isatty v0.0.13 h1:qdl+GuBjcsKKDco5BsxPJlId98mSWNKqYA+Co0SC1yA=
 github.com/mattn/go-isatty v0.0.13/go.mod h1:cbi8OIDigv2wuxKPP5vlRcQ1OAZbq2CE4Kysco4FUpU=
 github.com/vcaesar/cedar v0.10.1 h1:vx6zUYVqDP5ECazPx3Bsm2M4DDhn4vqRobK94LwXU+k=

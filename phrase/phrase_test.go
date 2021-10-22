@@ -31,7 +31,7 @@ func Test_pinyinPhrase(t *testing.T) {
 	}
 
 	for source, expect := range expects {
-		actual := splacesRegexp.ReplaceAllString(strings.TrimSpace(
+		actual := spacesReg.ReplaceAllString(strings.TrimSpace(
 			pinyinPhrase(source)), " ")
 		if expect != actual {
 			tt.Equal(t, expect, actual)

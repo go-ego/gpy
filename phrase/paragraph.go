@@ -16,8 +16,8 @@ import (
 )
 
 var (
-	splacesRegexp    = regexp.MustCompile(`[\s]+`)
-	allowCharsRegexp = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
+	spacesReg = regexp.MustCompile(`[\s]+`)
+	allowReg  = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
 
 	// Option set pinyin style args option
 	Option = gpy.Args{
@@ -25,7 +25,7 @@ var (
 		Heteronym: true,
 	}
 
-	hansSymbols = map[string]string{
+	hanSymbols = map[string]string{
 		"？": "?",
 		"！": "!",
 		"：": ":",
@@ -83,18 +83,18 @@ func Paragraph(p string, segs ...gse.Segmenter) (s string) {
 			// Not han chars
 			char := string(r)
 
-			if allowCharsRegexp.MatchString(char) {
+			if allowReg.MatchString(char) {
 				s += char
 			} else {
-				if hansSymbols[char] != "" {
-					s += hansSymbols[char]
+				if hanSymbols[char] != "" {
+					s += hanSymbols[char]
 				}
 			}
 		}
 	}
 
-	// 去掉连续两个空格
-	s = splacesRegexp.ReplaceAllString(s, " ")
+	// trim the two continuous spaces
+	s = spacesReg.ReplaceAllString(s, " ")
 	m := map[string]string{
 		" ,": ",",
 		" .": ".",
