@@ -1,6 +1,3 @@
-## Usage
-
-```go
 package main
 
 import (
@@ -52,4 +49,3 @@ func phraseExampleWithFileDict2() {
 	phrase.AddDict("都会区", "dū huì qū")
 	fmt.Println("gpy phrase 2:", phrase.Paragraph(test))
 }
-```
