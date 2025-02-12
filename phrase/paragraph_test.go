@@ -33,7 +33,7 @@ func TestParagraph(t *testing.T) {
 		"北京八达岭长城":         "bei jing ba da ling chang cheng",
 	}
 
-	seg, err := gse.New("zh, ../examples/dict.txt")
+	seg, err := gse.New("zh, ../examples/example_phrase/dict.txt")
 	tt.Nil(t, err)
 	for source, expect := range expects {
 		actual := Paragraph(source, seg)
@@ -46,7 +46,7 @@ func TestParagraph(t *testing.T) {
 }
 
 func TestPinyin(t *testing.T) {
-	seg, _ := gse.New("zh, ../examples/dict.txt")
+	seg, _ := gse.New("zh, ../examples/example_phrase/dict.txt")
 	WithGse(seg)
 
 	text := "西雅图都会区, 西雅图太空针"
