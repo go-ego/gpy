@@ -8,6 +8,7 @@ package phrase
 
 import (
 	"strings"
+	"unicode"
 
 	"github.com/go-ego/gpy"
 	"github.com/go-ego/gse"
@@ -62,10 +63,21 @@ func Match(word string) string {
 	return match
 }
 
+func isPunctOrSymbol(r rune) bool {
+	return unicode.IsOneOf([]*unicode.RangeTable{unicode.Punct, unicode.Symbol}, r)
+}
+
 func matchs(s, word string) string {
-	match := Match(word)
-	if match != "" {
-		s = strings.Replace(s, word, " "+match+" ", 1)
+	if match := Match(word); match != "" {
+		if before, after, found := strings.Cut(s, word); found {
+			if before := []rune(before); len(before) > 0 && !isPunctOrSymbol(before[len(before)-1]) {
+				match = " " + match
+			}
+			if after := []rune(after); len(after) > 0 && !isPunctOrSymbol(after[0]) {
+				match += " "
+			}
+			s = strings.Replace(s, word, match, 1)
+		}
 	}
 
 	return s

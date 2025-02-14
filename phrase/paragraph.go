@@ -17,7 +17,6 @@ import (
 
 var (
 	spacesReg = regexp.MustCompile(`[\s]+`)
-	allowReg  = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
 
 	// Option set pinyin style args option
 	Option = gpy.Args{
@@ -25,18 +24,20 @@ var (
 		Heteronym: true,
 	}
 
-	hanSymbols = map[string]string{
-		"？": "?",
-		"！": "!",
-		"：": ":",
-		"。": ".",
-		"，": ",",
-		"；": ";",
-		"（": "(",
-		"）": ")",
-		"【": "[",
-		"】": "]",
-		"、": ",",
+	hanSymbols = map[rune]rune{
+		'？': '?',
+		'！': '!',
+		'：': ':',
+		'。': '.',
+		'，': ',',
+		'；': ';',
+		'（': '(',
+		'）': ')',
+		'【': '[',
+		'】': ']',
+		'、': ',',
+		'“': '"',
+		'”': '"',
 	}
 )
 
@@ -66,52 +67,35 @@ func Join(a []string) (s string) {
 // including letters, numbers, symbols
 func Paragraph(p string, segs ...gse.Segmenter) (s string) {
 	p = pinyinPhrase(p, segs...)
-
+	var b strings.Builder
+	var last rune
 	for _, r := range p {
 		if unicode.Is(unicode.Han, r) {
 			// Han chars
+			if last != 0 && !isPunctOrSymbol(last) {
+				b.WriteRune(' ')
+			}
 			result := gpy.HanPinyin(string(r), Option)
 			if len(result) == 0 {
 				continue
 			}
-
 			if len(result[0]) == 0 {
 				continue
 			}
-
-			s += " " + string(result[0][0]) + " "
+			b.WriteString(result[0][0])
+		} else if symbol, ok := hanSymbols[r]; ok {
+			// Han symbols
+			b.WriteRune(symbol)
 		} else {
-			// Not han chars
-			char := string(r)
-
-			if allowReg.MatchString(char) {
-				s += char
-			} else {
-				if hanSymbols[char] != "" {
-					s += hanSymbols[char]
-				}
-			}
+			// Ohter
+			b.WriteRune(r)
 		}
+		last = r
 	}
+	s = b.String()
 
 	// trim the two continuous spaces
 	s = spacesReg.ReplaceAllString(s, " ")
-	m := map[string]string{
-		" ,": ",",
-		" .": ".",
-		" ?": "?",
-		" !": "!",
-		" ;": ";",
-		" :": ":",
-		" (": "(",
-		") ": ")",
-		"[ ": "[",
-		" ]": "]",
-	}
-
-	for k, v := range m {
-		s = strings.Replace(s, k, v, -1)
-	}
 
 	s = strings.TrimSpace(s)
 	return

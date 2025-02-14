@@ -31,6 +31,15 @@ func TestParagraph(t *testing.T) {
 		"香港维多利亚港":         "xiang gang wei duo li ya gang",
 		"上海外滩, 陆家嘴上海中心大厦": "shang hai wai tan, lu jia zui shang hai zhong xin da sha",
 		"北京八达岭长城":         "bei jing ba da ling chang cheng",
+
+		"你好Golang":         "ni hao Golang",
+		"2006年":            "2006 nian",
+		"价格$100":           "jia ge$100",
+		"邮箱：test@mail.com": "you xiang:test@mail.com",
+		"你好！":              "ni hao!",
+		"“你好”":             "\"ni hao\"",
+		"中文#标签":            "zhong wen#biao qian",
+		"阅读《Astérix》":      "yue du《Astérix》",
 	}
 
 	seg, err := gse.New("zh, ../examples/dict.txt")
