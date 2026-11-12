@@ -88,7 +88,7 @@ func Usage() {
 	fmt.Fprintf(os.Stderr,
 		"\nUsage:\n %s [flags..] HANS [HANS ...]\n\nFlags:\n\n",
 		progname)
-	fmt.Fprintf(os.Stderr, usageSummary)
+	fmt.Fprint(os.Stderr, usageSummary)
 	flag.PrintDefaults()
 	fmt.Fprintf(os.Stderr,
 		"\n-s 或 -d 也可以由 PINYIN_S 或 PINYIN_D 环境变量指定\n")

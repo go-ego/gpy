@@ -46,6 +46,32 @@ func ExamplePinyin_tone2() {
 	// Output: Tone2: [[zho1ng] [guo2] [hua4]]
 }
 
+func ExamplePinyin_tone3() {
+	a := gpy.NewArgs()
+	a.Style = gpy.Tone3
+	fmt.Println("Tone3:", gpy.Pinyin(hans, a))
+	// Output: Tone3: [[zhong1] [guo2] [hua4]]
+}
+
+func ExamplePinyin_finalsTone3() {
+	a := gpy.NewArgs()
+	a.Style = gpy.FinalsTone3
+	fmt.Println(gpy.Pinyin(hans, a))
+	// Output: [[ong1] [uo2] [ua4]]
+}
+
+func ExamplePy() {
+	fmt.Println(gpy.Py(hans))
+	// Output: zhong guo hua
+}
+
+func ExampleToString() {
+	a := gpy.Args{Style: gpy.Tone, Heteronym: true}
+	py := gpy.Pinyin(`西雅图都会区; 长夜漫漫, winter is coming!`, a)
+	fmt.Println(gpy.ToString(py))
+	// Output: xī yǎ tú dōu huì qū; zhǎng yè màn màn, winter is coming!
+}
+
 func ExamplePinyin_initials() {
 	a := gpy.NewArgs()
 	a.Style = gpy.Initials

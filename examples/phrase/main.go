@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/go-ego/gpy/phrase"
 	"github.com/go-ego/gse"
 )
@@ -9,43 +11,46 @@ import (
 var test = `西雅图都会区; 长夜漫漫, winter is coming!`
 
 func main() {
-	// use default embed segmentation dict
+	// use the embedded gse segmentation dict
 	phraseExampleWithEmbedDict()
-	// use custom file segmentation dict
-	phraseExampleWithFileDict1()
-	// use custom file segmentation dict
-	phraseExampleWithFileDict2()
+	// use a custom segmenter loaded from a dict file
+	phraseExampleWithFileDict()
+	// use the default gse dict files
+	phraseExampleWithDefaultDict()
 }
 
 func phraseExampleWithEmbedDict() {
-	// load default gse dict
-	_ = phrase.LoadGseDictEmbed("zh")
-	// convert a Chinese string paragraph to pinyin
+	// load the embedded gse dict
+	if err := phrase.LoadGseDictEmbed("zh"); err != nil {
+		log.Fatal(err)
+	}
+	// convert a Chinese paragraph to pinyin
 	fmt.Println("gpy phrase:", phrase.Paragraph(test))
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+	// xi ya tu dou hui qu; chang ye man man, winter is coming!
+
+	// customize the pinyin of a word
+	// (same as: phrase.DictAdd["都会区"] = "dū huì qū")
 	phrase.AddDict("都会区", "dū huì qū")
-	// convert a Chinese string paragraph to pinyin with user's dict
 	fmt.Println("gpy phrase:", phrase.Paragraph(test))
+	// xi ya tu du hui qu; chang ye man man, winter is coming!
 }
 
-// if you want to customize the segmentation dict, you can use the following code
-func phraseExampleWithFileDict1() {
-	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
-	// load gse dict from file
-	seg, _ := gse.New("zh, dict.txt")
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+// customize the segmentation dict with your own gse.Segmenter
+func phraseExampleWithFileDict() {
+	// load the gse "zh" dict and the local dict.txt
+	seg, err := gse.New("zh, dict.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 	phrase.AddDict("都会区", "dū huì qū")
-	fmt.Println("gpy phrase 2:", phrase.Paragraph(test, seg))
+	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
 }
 
-// if you want to customize the segmentation dict, you can also use the following code
-func phraseExampleWithFileDict2() {
-	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
-	phrase.LoadGseDict()
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+// load the default gse dict files into the phrase segmenter
+func phraseExampleWithDefaultDict() {
+	if err := phrase.LoadGseDict(); err != nil {
+		log.Fatal(err)
+	}
 	phrase.AddDict("都会区", "dū huì qū")
-	fmt.Println("gpy phrase 2:", phrase.Paragraph(test))
+	fmt.Println("gpy phrase:", phrase.Paragraph(test))
 }

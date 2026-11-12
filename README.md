@@ -1,50 +1,87 @@
+
 # gpy
 
 [![Build Status](https://github.com/go-ego/gpy/workflows/Go/badge.svg)](https://github.com/go-ego/gpy/commits/master)
-[![CircleCI Status](https://circleci.com/gh/go-ego/gpy.svg?style=shield)](https://circleci.com/gh/go-ego/gpy)
-[![Build Status](https://travis-ci.org/go-ego/gpy.svg?branch=master)](https://travis-ci.org/go-ego/gpy)<!-- [![Coverage Status](https://coveralls.io/repos/github.com/go-ego/gpy/badge.svg?branch=master)](https://coveralls.io/r/github.com/go-ego/gpy?branch=master) -->
+[![golangci-lint](https://img.shields.io/badge/linted%20by-golangci--lint-brightgreen)](https://golangci-lint.run/)
 [![codecov](https://codecov.io/gh/go-ego/gpy/branch/master/graph/badge.svg)](https://codecov.io/gh/go-ego/gpy)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-ego/gpy)](https://goreportcard.com/report/github.com/go-ego/gpy)
-[![GoDoc](https://godoc.org/github.com/go-ego/gpy?status.svg)](https://godoc.org/github.com/go-ego/gpy)
+[![Go Reference](https://pkg.go.dev/badge/github.com/go-ego/gpy.svg)](https://pkg.go.dev/github.com/go-ego/gpy)
 
-汉语拼音转换工具 Go 版。
+Chinese to Hanyu Pinyin conversion in Go (汉语拼音转换工具 Go 版).
 
-[简体中文](https://github.com/go-ego/gpy/blob/master/README_zh.md)
+English | [简体中文](https://github.com/go-ego/gpy/blob/master/README_zh.md)
 
 ## Installation
 
-```
-go get -u github.com/go-ego/gpy
-```
-
-### Install CLI tool:
+Requires Go 1.24 or later.
 
 ```
-go get -u github.com/go-ego/gpy/tools/pinyin
+go get github.com/go-ego/gpy
+```
+
+### Install the CLI tool
+
+```
+go install github.com/go-ego/gpy/tools/pinyin@latest
+```
+
+```
 $ pinyin 中国话
-zhōng guó huà 
+zhōng guó huà
 
 $ pinyin -s zhao 中国话
 zhong guo hua
+
+$ pinyin -p 西雅图都会区
+xī yǎ tú dōu huì qū
 ```
 
+Flags:
+
+| Flag | Description |
+| --- | --- |
+| `-s` | Pinyin style: `zhao`, `zh4ao` (default), `zha4o`, `zhao4`, `zh`, `z`, `ao`, `4ao`, `a4o`, `ao4` |
+| `-e` | Enable heteronym (multiple pronunciations) mode |
+| `-p` | Enable phrase (word segmentation) mode |
+| `-d` | Delimiter |
+| `-v` | Verbose output |
+
+`-s` and `-d` can also be set with the `PINYIN_S` and `PINYIN_D` environment variables.
+
 ## Usage
-- If you only want to convert some simple Chinese words to pinyin, you can use the `github.com/go-ego/gpy` package.
-- If you want to convert Chinese sentences to pinyin with more accurate results, you can use the `github.com/go-ego/gpy/phrase` package.
+
+- To convert simple Chinese words to pinyin, use the `github.com/go-ego/gpy` package.
+- To convert Chinese sentences to pinyin with more accurate results, use the `github.com/go-ego/gpy/phrase` package.
+
+### Styles
+
+| Style | Example (中国) |
+| --- | --- |
+| `gpy.Normal` (default) | `zhong guo` |
+| `gpy.Tone` | `zhōng guó` |
+| `gpy.Tone2` | `zho1ng guo2` |
+| `gpy.Tone3` | `zhong1 guo2` |
+| `gpy.Initials` | `zh g` |
+| `gpy.FirstLetter` | `z g` |
+| `gpy.Finals` | `ong uo` |
+| `gpy.FinalsTone` | `ōng uó` |
+| `gpy.FinalsTone2` | `o1ng uo2` |
+| `gpy.FinalsTone3` | `ong1 uo2` |
 
 ### gpy example
-Use the `github.com/go-ego/gpy` package to convert Chinese words to pinyin.
+
+Use the `github.com/go-ego/gpy` package to convert Chinese words to pinyin, character by character, without word segmentation.
+
 ```go
 package main
 
 import (
 	"fmt"
+
 	"github.com/go-ego/gpy"
 )
 
 var test = `西雅图都会区; 长夜漫漫, winter is coming!`
 
-// if you just want to get the pinyin of a word without segmenting it, you can use the following code
 func main() {
 	args := gpy.Args{
 		Style:     gpy.Tone,
@@ -52,9 +89,11 @@ func main() {
 
 	py := gpy.Pinyin(test, args)
 	fmt.Println("gpy:", py)
+	// gpy: [[xī] [yǎ yā yá] [tú] [dōu dū] [huì kuài] [qū ōu] [;] [ ] [zhǎng cháng] ...]
 
 	s := gpy.ToString(py)
 	fmt.Println("gpy string:", s)
+	// gpy string: xī yǎ tú dōu huì qū; zhǎng yè màn màn, winter is coming!
 }
 ```
 
@@ -70,22 +109,27 @@ import (
 func main() {
 	hans := "中国话"
 
-	// 默认
+	// default style
 	a := gpy.NewArgs()
 	fmt.Println(gpy.Pinyin(hans, a))
 	// [[zhong] [guo] [hua]]
 
-	// 包含声调
+	// with tone marks
 	a.Style = gpy.Tone
 	fmt.Println(gpy.Pinyin(hans, a))
 	// [[zhōng] [guó] [huà]]
 
-	// 声调用数字表示
+	// tones as numbers after the vowel
 	a.Style = gpy.Tone2
 	fmt.Println(gpy.Pinyin(hans, a))
 	// [[zho1ng] [guo2] [hua4]]
 
-	// 开启多音字模式
+	// tones as numbers at the end
+	a.Style = gpy.Tone3
+	fmt.Println(gpy.Pinyin(hans, a))
+	// [[zhong1] [guo2] [hua4]]
+
+	// heteronym mode
 	a = gpy.NewArgs()
 	a.Heteronym = true
 	fmt.Println(gpy.Pinyin(hans, a))
@@ -102,19 +146,28 @@ func main() {
 
 	fmt.Println(gpy.LazyConvert(hans, nil))
 	// [zhong guo hua]
+
+	fmt.Println(gpy.Py(hans))
+	// zhong guo hua
 }
 ```
 
 ### gpy/phrase example
+
 Use the `github.com/go-ego/gpy/phrase` package to convert Chinese sentences to pinyin.
-- Based on segment - More accurate sentence pinyin conversion
-- Support for custom segmentation dictionaries
-- Support for custom pinyin of words
+
+- Based on [gse](https://github.com/go-ego/gse) word segmentation - more accurate sentence pinyin conversion
+- Supports custom segmentation dictionaries
+- Supports custom pinyin for words
+- The output style is set by `phrase.Option` (default: `gpy.Normal` style)
+
 ```go
 package main
 
 import (
 	"fmt"
+	"log"
+
 	"github.com/go-ego/gpy/phrase"
 	"github.com/go-ego/gse"
 )
@@ -122,55 +175,59 @@ import (
 var test = `西雅图都会区; 长夜漫漫, winter is coming!`
 
 func main() {
-	// use default embed segmentation dict
+	// use the embedded gse segmentation dict
 	phraseExampleWithEmbedDict()
-	// use custom file segmentation dict
-	phraseExampleWithFileDict1()
-	// use custom file segmentation dict
-	phraseExampleWithFileDict2()
+	// use a custom segmenter loaded from a dict file
+	phraseExampleWithFileDict()
+	// use the default gse dict files
+	phraseExampleWithDefaultDict()
 }
 
 func phraseExampleWithEmbedDict() {
-	// load default gse dict
-	_ = phrase.LoadGseDictEmbed("zh")
-	// convert a Chinese string paragraph to pinyin
+	// load the embedded gse dict
+	if err := phrase.LoadGseDictEmbed("zh"); err != nil {
+		log.Fatal(err)
+	}
+	// convert a Chinese paragraph to pinyin
 	fmt.Println("gpy phrase:", phrase.Paragraph(test))
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+	// xi ya tu dou hui qu; chang ye man man, winter is coming!
+
+	// customize the pinyin of a word
+	// (same as: phrase.DictAdd["都会区"] = "dū huì qū")
 	phrase.AddDict("都会区", "dū huì qū")
-	// convert a Chinese string paragraph to pinyin with user's dict
 	fmt.Println("gpy phrase:", phrase.Paragraph(test))
+	// xi ya tu du hui qu; chang ye man man, winter is coming!
 }
 
-// if you want to customize the segmentation dict, you can use the following code
-func phraseExampleWithFileDict1() {
-	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
-	// load gse dict from file
-	seg, _ := gse.New("zh, dict.txt")
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+// customize the segmentation dict with your own gse.Segmenter
+func phraseExampleWithFileDict() {
+	// load the gse "zh" dict and the local dict.txt
+	seg, err := gse.New("zh, dict.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
 	phrase.AddDict("都会区", "dū huì qū")
-	fmt.Println("gpy phrase 2:", phrase.Paragraph(test, seg))
+	fmt.Println("gpy phrase:", phrase.Paragraph(test, seg))
 }
 
-// if you want to customize the segmentation dict, you can also use the following code
-func phraseExampleWithFileDict2() {
-	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
-	phrase.LoadGseDict()
-	// if you want to customize the pinyin of a word, you can use the following code
-	//phrase.DictAdd["都会区"] = "dū huì qū"
+// load the default gse dict files into the phrase segmenter
+func phraseExampleWithDefaultDict() {
+	if err := phrase.LoadGseDict(); err != nil {
+		log.Fatal(err)
+	}
 	phrase.AddDict("都会区", "dū huì qū")
-	fmt.Println("gpy phrase 2:", phrase.Paragraph(test))
+	fmt.Println("gpy phrase:", phrase.Paragraph(test))
 }
 ```
 
+See [examples](https://github.com/go-ego/gpy/tree/master/examples) for runnable code (`dict.txt` is in [examples/phrase](https://github.com/go-ego/gpy/tree/master/examples/phrase)).
 
 ## Related Projects
 
-* [hotoo/pinyin](https://github.com/hotoo/pinyin): 汉语拼音转换工具 Node.js/JavaScript 版。
-* [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): 汉语拼音转换工具 Python 版。
-* [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): 汉语拼音转换工具 Rust 版。
+* [hotoo/pinyin](https://github.com/hotoo/pinyin): Chinese to pinyin for Node.js/JavaScript.
+* [mozillazg/python-pinyin](https://github.com/mozillazg/python-pinyin): Chinese to pinyin for Python.
+* [mozillazg/rust-pinyin](https://github.com/mozillazg/rust-pinyin): Chinese to pinyin for Rust.
 
 ## License
 
-Under the MIT License, base on [go-pinyin](https://github.com/mozillazg/go-pinyin).
+Under the MIT License, based on [go-pinyin](https://github.com/mozillazg/go-pinyin).

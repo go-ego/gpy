@@ -47,7 +47,9 @@ var PinyinDict = map[int]string{
 
 	output += strings.Join(lines, "\n")
 	output += "\n}\n"
-	outFile.WriteString(output)
+	if _, err := outFile.WriteString(output); err != nil {
+		panic(err)
+	}
 	// return
 }
 
@@ -81,8 +83,12 @@ func main() {
 		panic(err)
 	}
 
-	defer inFp.Close()
-	defer outFp.Close()
-
 	genCode(inFp, outFp)
+
+	if err := inFp.Close(); err != nil {
+		panic(err)
+	}
+	if err := outFp.Close(); err != nil {
+		panic(err)
+	}
 }
