@@ -17,7 +17,6 @@ import (
 
 var (
 	spacesReg = regexp.MustCompile(`[\s]+`)
-	allowReg  = regexp.MustCompile(`[a-zA-Z0-9\.,\?\!;\(\)\[\]\&\=\-_@\s]`)
 
 	// Option set pinyin style args option
 	Option = gpy.Args{
@@ -25,20 +24,65 @@ var (
 		Heteronym: true,
 	}
 
-	hanSymbols = map[string]string{
-		"？": "?",
-		"！": "!",
-		"：": ":",
-		"。": ".",
-		"，": ",",
-		"；": ";",
-		"（": "(",
-		"）": ")",
-		"【": "[",
-		"】": "]",
-		"、": ",",
+	hanSymbols = map[rune]rune{
+		'？': '?',
+		'！': '!',
+		'：': ':',
+		'。': '.',
+		'，': ',',
+		'；': ';',
+		'（': '(',
+		'）': ')',
+		'【': '[',
+		'】': ']',
+		'、': ',',
+		'“': '"',
+		'”': '"',
 	}
 )
+
+// rune classes used to decide where spaces go
+const (
+	clsNone   = iota
+	clsSyl    // han syllable
+	clsWord   // letters, digits and other non-punctuation
+	clsOpen   // opening punctuation: ( [ 《 “
+	clsClose  // closing and sentence punctuation: ) ] 》 ” , . ! ? ; :
+	clsSymbol // other punctuation and symbols: - # $ @ ~ ...
+)
+
+func class(r rune) int {
+	switch {
+	case unicode.IsSpace(r):
+		return clsNone
+	case unicode.Is(unicode.Han, r):
+		return clsSyl
+	case unicode.In(r, unicode.Ps, unicode.Pi):
+		return clsOpen
+	case unicode.In(r, unicode.Pe, unicode.Pf),
+		strings.ContainsRune(",.!?;:，。！？；：、", r):
+		return clsClose
+	case unicode.IsPunct(r) || unicode.IsSymbol(r):
+		return clsSymbol
+	}
+	return clsWord
+}
+
+// needSpace reports whether a space goes between items of class prev and next;
+// spaced reports whether the input already had whitespace between them.
+func needSpace(prev, next int, spaced bool) bool {
+	switch {
+	case prev == clsNone, prev == clsOpen, next == clsClose:
+		return false
+	case spaced:
+		return true
+	case next == clsSyl:
+		return prev == clsSyl || prev == clsWord || prev == clsClose
+	case prev == clsSyl:
+		return next == clsWord
+	}
+	return false
+}
 
 // Pinyin return paragraph []string
 func Pinyin(p string, segs ...gse.Segmenter) []string {
@@ -64,55 +108,34 @@ func Join(a []string) (s string) {
 
 // Paragraph convert a Chinese string paragraph to pinyin,
 // including letters, numbers, symbols
-func Paragraph(p string, segs ...gse.Segmenter) (s string) {
+func Paragraph(p string, segs ...gse.Segmenter) string {
 	p = pinyinPhrase(p, segs...)
 
+	var b strings.Builder
+	prev, spaced := clsNone, false
 	for _, r := range p {
-		if unicode.Is(unicode.Han, r) {
-			// Han chars
-			result := gpy.HanPinyin(string(r), Option)
-			if len(result) == 0 {
-				continue
-			}
-
-			if len(result[0]) == 0 {
-				continue
-			}
-
-			s += " " + string(result[0][0]) + " "
-		} else {
-			// Not han chars
-			char := string(r)
-
-			if allowReg.MatchString(char) {
-				s += char
-			} else {
-				if hanSymbols[char] != "" {
-					s += hanSymbols[char]
-				}
-			}
+		if unicode.IsSpace(r) {
+			spaced = true
+			continue
 		}
+
+		cls, out := class(r), string(r)
+		if cls == clsSyl {
+			result := gpy.HanPinyin(out, Option)
+			if len(result) == 0 || len(result[0]) == 0 {
+				continue
+			}
+			out = result[0][0]
+		} else if symbol, ok := hanSymbols[r]; ok {
+			out = string(symbol)
+		}
+
+		if needSpace(prev, cls, spaced) {
+			b.WriteByte(' ')
+		}
+		b.WriteString(out)
+		prev, spaced = cls, false
 	}
 
-	// trim the two continuous spaces
-	s = spacesReg.ReplaceAllString(s, " ")
-	m := map[string]string{
-		" ,": ",",
-		" .": ".",
-		" ?": "?",
-		" !": "!",
-		" ;": ";",
-		" :": ":",
-		" (": "(",
-		") ": ")",
-		"[ ": "[",
-		" ]": "]",
-	}
-
-	for k, v := range m {
-		s = strings.Replace(s, k, v, -1)
-	}
-
-	s = strings.TrimSpace(s)
-	return
+	return b.String()
 }

@@ -8,7 +8,7 @@ import (
 )
 
 func BenchmarkParagraph(b *testing.B) {
-	for i := 0; i < b.N; i++ {
+	for b.Loop() {
 		// about 0.046ms/op
 		Paragraph("西雅图太空针, The Space Nedle")
 	}
@@ -31,22 +31,44 @@ func TestParagraph(t *testing.T) {
 		"香港维多利亚港":         "xiang gang wei duo li ya gang",
 		"上海外滩, 陆家嘴上海中心大厦": "shang hai wai tan, lu jia zui shang hai zhong xin da sha",
 		"北京八达岭长城":         "bei jing ba da ling chang cheng",
+
+		// cases from PR #29
+		"你好Golang":         "ni hao Golang",
+		"2006年":            "2006 nian",
+		"价格$100":           "jia ge$100",
+		"邮箱：test@mail.com": "you xiang:test@mail.com",
+		"你好！":              "ni hao!",
+		"“你好”":             "\"ni hao\"",
+		"中文#标签":            "zhong wen#biao qian",
+		"阅读《Astérix》":      "yue du《Astérix》",
+
+		// regressions in PR #29 and master
+		"你好，世界。再见！":  "ni hao, shi jie. zai jian!",
+		"第2名":        "di 2 ming",
+		"猫a狗":        "mao a gou",
+		"中-文":        "zhong-wen",
+		"“你好”世界":     "\"ni hao\" shi jie",
+		"你好 , 世界":    "ni hao, shi jie",
+		"阅读《三体》":     "yue du《san ti》",
+		"你好（世界）再见":   "ni hao(shi jie) zai jian",
+		"【注】你好":      "[zhu] ni hao",
+		"  前后  空格  ": "qian hou kong ge",
+		"Hello世界":    "Hello shi jie",
+		"价格~100元😀":   "jia ge~100 yuan😀",
+		"a  b":       "a b",
+		"":           "",
 	}
 
-	seg, err := gse.New("zh, ../examples/example_phrase/dict.txt")
+	seg, err := gse.New("zh, ../examples/phrase/dict.txt")
 	tt.Nil(t, err)
 	for source, expect := range expects {
-		actual := Paragraph(source, seg)
-		if expect != actual {
-			tt.Equal(t, expect, actual)
-			break
-		}
+		tt.Equal(t, expect, Paragraph(source, seg), source)
 	}
 
 }
 
 func TestPinyin(t *testing.T) {
-	seg, _ := gse.New("zh, ../examples/example_phrase/dict.txt")
+	seg, _ := gse.New("zh, ../examples/phrase/dict.txt")
 	WithGse(seg)
 
 	text := "西雅图都会区, 西雅图太空针"

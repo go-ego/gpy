@@ -8,6 +8,7 @@ package phrase
 
 import (
 	"strings"
+	"unicode/utf8"
 
 	"github.com/go-ego/gpy"
 	"github.com/go-ego/gse"
@@ -64,11 +65,25 @@ func Match(word string) string {
 
 func matchs(s, word string) string {
 	match := Match(word)
-	if match != "" {
-		s = strings.Replace(s, word, " "+match+" ", 1)
+	if match == "" {
+		return s
 	}
 
-	return s
+	before, after, found := strings.Cut(s, word)
+	if !found {
+		return s
+	}
+
+	if r, _ := utf8.DecodeLastRuneInString(before); before != "" &&
+		needSpace(class(r), clsSyl, false) {
+		match = " " + match
+	}
+	if r, _ := utf8.DecodeRuneInString(after); after != "" &&
+		needSpace(clsSyl, class(r), false) {
+		match += " "
+	}
+
+	return before + match + after
 }
 
 func pinyinPhrase(s string, segs ...gse.Segmenter) string {
