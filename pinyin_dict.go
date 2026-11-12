@@ -8156,7 +8156,7 @@ var PinyinDict = map[int]string{
 	0x5754:  "dì,làn",
 	0x5755:  "jīng",
 	0x5756:  "jì",
-	0x5757:  "kuài,yué",
+	0x5757:  "kuài",
 	0x5758:  "dǐ",
 	0x5759:  "jīng",
 	0x575A:  "jiān",

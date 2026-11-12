@@ -3,6 +3,7 @@ package phrase
 import (
 	"testing"
 
+	"github.com/go-ego/gpy"
 	"github.com/go-ego/gse"
 	"github.com/vcaesar/tt"
 )
@@ -57,6 +58,9 @@ func TestParagraph(t *testing.T) {
 		"价格~100元😀":   "jia ge~100 yuan😀",
 		"a  b":       "a b",
 		"":           "",
+
+		// issue #15
+		"中国银行": "zhong guo yin hang",
 	}
 
 	seg, err := gse.New("zh, ../examples/phrase/dict.txt")
@@ -65,6 +69,18 @@ func TestParagraph(t *testing.T) {
 		tt.Equal(t, expect, Paragraph(source, seg), source)
 	}
 
+}
+
+// issues #15 and #20: tone marks must be kept and 银行 read as yín háng
+func TestParagraphTone(t *testing.T) {
+	old := Option
+	defer func() { Option = old }()
+	Option = gpy.Args{Style: gpy.Tone, Heteronym: true}
+
+	seg, err := gse.New("zh, ../examples/phrase/dict.txt")
+	tt.Nil(t, err)
+	tt.Equal(t, "zhōng guó huà", Paragraph("中国话", seg))
+	tt.Equal(t, "yín háng", Paragraph("银行", seg))
 }
 
 func TestPinyin(t *testing.T) {

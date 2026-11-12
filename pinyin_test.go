@@ -158,6 +158,29 @@ func TestPinyin(t *testing.T) {
 		},
 	}
 	testPinyinTool(t, hans, testData, Pinyin)
+
+	// issue #24: 块 has no "yué" reading
+	testData = []testCase{
+		{
+			Args{Style: Tone, Heteronym: true},
+			[][]string{
+				{"kuài"},
+			},
+		},
+	}
+	testPinyinTool(t, "块", testData, Pinyin)
+
+	// issue #15: Heteronym returns every reading of 行
+	testData = []testCase{
+		{
+			Args{Style: Tone, Heteronym: true},
+			[][]string{
+				{"yín"},
+				{"xíng", "háng", "xìng", "hàng", "héng"},
+			},
+		},
+	}
+	testPinyinTool(t, "银行", testData, Pinyin)
 }
 
 func TestNoneHans(t *testing.T) {

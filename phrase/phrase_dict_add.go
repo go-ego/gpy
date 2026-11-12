@@ -12,6 +12,7 @@ var DictAdd = map[string]string{
 	"着手": "zhuó shǒu",
 	"着眼": "zhuó yǎn",
 	"着重": "zhuó zhòng",
+	"银行": "yín háng",
 }
 
 // AddDict add a token into phrase dictionary.
