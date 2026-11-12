@@ -3,6 +3,9 @@
 .vscode
 .idea
 tools/pinyin/pinyin
+.v0
+.codg
+test
 
 # Debug files
 *.dSYM/

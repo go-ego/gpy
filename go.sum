@@ -1,11 +1,11 @@
-github.com/go-ego/gse v0.69.15 h1:QprXRGKim8fI2B38ItT4YwuY9/37gwUAw37TnA3exa0=
-github.com/go-ego/gse v0.69.15/go.mod h1:M9Xv8cEW7Of27BbE4p0iI3arqQHCYcm5N16/2b3pPPk=
+github.com/go-ego/gse v1.3.1 h1:/UkeL8Gu48SNvBDDhHKdFYjWqxaf6FlqXR+wYQ6SWbU=
+github.com/go-ego/gse v1.3.1/go.mod h1:K3EACmEtMgNNog8Rp7uY5FaY++yjFcWDWQUnDT3zk4w=
 github.com/mattn/go-isatty v0.0.13 h1:qdl+GuBjcsKKDco5BsxPJlId98mSWNKqYA+Co0SC1yA=
 github.com/mattn/go-isatty v0.0.13/go.mod h1:cbi8OIDigv2wuxKPP5vlRcQ1OAZbq2CE4Kysco4FUpU=
-github.com/vcaesar/cedar v0.20.0 h1:VtBy/twzVjXiTo1Ij3fQRyDQRzvzDa9sKacpbwSJyps=
-github.com/vcaesar/cedar v0.20.0/go.mod h1:iMDweyuW76RvSrCkQeZeQk4iCbshiPzcCvcGCtpM7iI=
-github.com/vcaesar/tt v0.20.0 h1:9t2Ycb9RNHcP0WgQgIaRKJBB+FrRdejuaL6uWIHuoBA=
-github.com/vcaesar/tt v0.20.0/go.mod h1:GHPxQYhn+7OgKakRusH7KJ0M5MhywoeLb8Fcffs/Gtg=
+github.com/vcaesar/cedar v0.50.1 h1:JhchIiYZyvjT7EhjMR3oN7JH7QNgeqLrw/zaPBrTWRQ=
+github.com/vcaesar/cedar v0.50.1/go.mod h1:eHvpmJXJmOowP8mW/Xqjra+HmKovJNcRxRPtezHjh7I=
+github.com/vcaesar/tt v0.40.0 h1:vWUNRJn13ozP3xXlAXV5q9WivaDSHRS2jQ2J2ayCvQs=
+github.com/vcaesar/tt v0.40.0/go.mod h1:cH2+AwGAJm19Wa6xvEa+0r+sXDJBT0QgNQey6mwqLeU=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=
 golang.org/x/sys v0.1.0 h1:kunALQeHf1/185U1i0GOB/fy1IPRDDpuoOOqRReG57U=
 golang.org/x/sys v0.1.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
