@@ -28,6 +28,34 @@ zhong guo hua
 ```
 
 ## Usage
+- 简单汉字转换成拼音，可以使用 `github.com/go-ego/gpy` 。
+- 中文词句转换成拼音，结果更准确，可以使用 `github.com/go-ego/gpy/phrase` 。
+
+### gpy 使用示例
+使用 `github.com/go-ego/gpy` 将中文单词转换为拼音
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/go-ego/gpy"
+)
+
+var test = `西雅图都会区; 长夜漫漫, winter is coming!`
+
+// if you just want to get the pinyin of a word without segmenting it, you can use the following code
+func main() {
+	args := gpy.Args{
+		Style:     gpy.Tone,
+		Heteronym: true}
+
+	py := gpy.Pinyin(test, args)
+	fmt.Println("gpy:", py)
+
+	s := gpy.ToString(py)
+	fmt.Println("gpy string:", s)
+}
+```
 
 ```go
 package main
@@ -73,6 +101,65 @@ func main() {
 
 	fmt.Println(gpy.LazyConvert(hans, nil))
 	// [zhong guo hua]
+}
+```
+
+### gpy/phrase 使用示例
+使用 `github.com/go-ego/gpy/phrase` 将中文句子转换为拼音.
+- 基于分词 - 更准确的句子拼音转换
+- 支持自定义分词词典
+- 支持单词的自定义拼音
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/go-ego/gpy/phrase"
+	"github.com/go-ego/gse"
+)
+
+var test = `西雅图都会区; 长夜漫漫, winter is coming!`
+
+func main() {
+	// use default embed segmentation dict
+	phraseExampleWithEmbedDict()
+	// use custom file segmentation dict
+	phraseExampleWithFileDict1()
+	// use custom file segmentation dict
+	phraseExampleWithFileDict2()
+}
+
+func phraseExampleWithEmbedDict() {
+	// load default gse dict
+	_ = phrase.LoadGseDictEmbed("zh")
+	// convert a Chinese string paragraph to pinyin
+	fmt.Println("gpy phrase:", phrase.Paragraph(test))
+	// if you want to customize the pinyin of a word, you can use the following code
+	//phrase.DictAdd["都会区"] = "dū huì qū"
+	phrase.AddDict("都会区", "dū huì qū")
+	// convert a Chinese string paragraph to pinyin with user's dict
+	fmt.Println("gpy phrase:", phrase.Paragraph(test))
+}
+
+// if you want to customize the segmentation dict, you can use the following code
+func phraseExampleWithFileDict1() {
+	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
+	// load gse dict from file
+	seg, _ := gse.New("zh, dict.txt")
+	// if you want to customize the pinyin of a word, you can use the following code
+	//phrase.DictAdd["都会区"] = "dū huì qū"
+	phrase.AddDict("都会区", "dū huì qū")
+	fmt.Println("gpy phrase 2:", phrase.Paragraph(test, seg))
+}
+
+// if you want to customize the segmentation dict, you can also use the following code
+func phraseExampleWithFileDict2() {
+	fmt.Println("gpy phrase 1:", phrase.Paragraph(test))
+	phrase.LoadGseDict()
+	// if you want to customize the pinyin of a word, you can use the following code
+	//phrase.DictAdd["都会区"] = "dū huì qū"
+	phrase.AddDict("都会区", "dū huì qū")
+	fmt.Println("gpy phrase 2:", phrase.Paragraph(test))
 }
 ```
 
